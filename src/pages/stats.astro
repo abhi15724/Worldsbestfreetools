@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Traffic by visitor type" desc="Private dashboard" path="/stats/" noindex={true}>
+<h1>Traffic by visitor type</h1>
+<p class="lead">Humans versus AI agents, AI search bots, AI training crawlers and search engines. Needs your STATS_TOKEN and the Upstash tracking store.</p>
+<input class="search" id="tk" type="password" placeholder="STATS_TOKEN" aria-label="Stats token"><button class="btn" id="go">Load</button>
+<div id="out" class="out" style="overflow-x:auto">Enter your token and press Load.</div>
+</Base>
+<script>
+const tk=document.getElementById('tk'),out=document.getElementById('out');tk.value=sessionStorage.getItem('st')||'';
+document.getElementById('go').onclick=async()=>{sessionStorage.setItem('st',tk.value);out.textContent='Loading…';
+const r=await fetch('/api/stats',{headers:{Authorization:'Bearer '+tk.value}}),d=await r.json();if(!r.ok){out.textContent=d.error;return}
+const C=['human','ai-agent','ai-search','ai-training','search-bot','other-bot'],esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+let h='<table><tr><th>Date</th>'+C.map(c=>'<th>'+c+'</th>').join('')+'</tr>'+d.days.map(x=>'<tr><td>'+x.date+'</td>'+C.map(c=>'<td>'+(x.classes[c]||0)+'</td>').join('')+'</tr>').join('')+'</table>';
+const B={},P={};d.days.forEach(x=>{for(const k in x.bots)B[k]=(B[k]||0)+x.bots[k];for(const k in x.agentPages)P[k]=(P[k]||0)+x.agentPages[k]});
+const top=o=>Object.entries(o).sort((a,b)=>b[1]-a[1]).slice(0,15).map(([k,v])=>'<tr><td>'+esc(k)+'</td><td>'+v+'</td></tr>').join('');
+out.innerHTML=h+'<h2>Top bots and agents (14 days)</h2><table>'+top(B)+'</table><h2>Pages agents read most</h2><table>'+top(P)+'</table>'};
+</script>

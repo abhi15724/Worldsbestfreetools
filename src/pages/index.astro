@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import {cats,live,tools,SITE} from '../data/tools.mjs';
+---
+<Base md="/md/index.md" title="Free Online Tools: Calculators, PDF, Image, QR & More | WorldsBestFreeTools" desc="Hundreds of free online tools: EMI and SIP calculators, image compressor, QR code generator, fancy fonts, converters and more. No signup, runs in your browser." ld={[{'@type':'WebSite',name:'WorldsBestFreeTools',url:SITE+'/'}]}>
+<h1>Free online tools that just work</h1>
+<p class="lead">Calculators, converters, image and QR tools. No signup, no uploads, no watermarks. Everything runs in your browser.</p>
+<input class="search" id="q" type="search" placeholder="Search tools, e.g. EMI calculator" aria-label="Search tools">
+<h2>All tools</h2>
+<div class="grid" id="list">{live.map(t=><a href={`/${t.slug}/`}>{t.name}<small>{cats.find(c=>c.slug===t.cat).name}</small></a>)}</div>
+<h2>Browse by category</h2>
+<div class="grid">{cats.map(c=><a href={`/category/${c.slug}/`}>{c.name}<small>{tools.filter(t=>t.cat===c.slug&&t.live).length} live · {tools.filter(t=>t.cat===c.slug).length} planned</small></a>)}</div>
+</Base>
+<script>
+const q=document.getElementById('q'),a=[...document.querySelectorAll('#list a')];
+q.addEventListener('input',()=>{const v=q.value.toLowerCase();a.forEach(x=>x.style.display=x.textContent.toLowerCase().includes(v)?'':'none')});
+</script>

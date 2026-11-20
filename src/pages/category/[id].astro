@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import {cats,tools} from '../../data/tools.mjs';
+export async function getStaticPaths(){const {cats}=await import('../../data/tools.mjs');return cats.map(x=>({params:{id:x.slug},props:{c:x}}))}
+const {c}=Astro.props;const ts=tools.filter(t=>t.cat===c.slug);
+---
+<Base title={`${c.name}: Free Online Tools`} desc={`Free ${c.name.toLowerCase()} that run in your browser. No signup needed.`} path={`/category/${c.slug}/`} noindex={!ts.some(t=>t.live)}>
+<p class="crumbs"><a href="/">Home</a> / {c.name}</p><h1>{c.name}</h1>
+<div class="grid">{ts.filter(t=>t.live).map(t=>(<a href={`/${t.slug}/`}>{t.name}</a>))}</div>
+{ts.some(t=>!t.live)?<section><h2>Coming soon</h2><ul class="tags">{ts.filter(t=>!t.live).map(t=>(<li>{t.name}</li>))}</ul></section>:null}
+</Base>

@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import {cats,live,seo,SITE} from '../data/tools.mjs';
+import {API_OF} from '../lib/agents.mjs';
+import {TOOLS,schemaOf} from '../../api/_calc.js';
+export async function getStaticPaths(){const {live}=await import('../data/tools.mjs');return live.map(x=>({params:{slug:x.slug},props:{t:x}}))}
+const {t}=Astro.props;const s=seo(t);const cat=cats.find(c=>c.slug===t.cat);
+const rel=live.filter(x=>x.cat===t.cat&&x.slug!==t.slug).slice(0,6);const url=`${SITE}/${t.slug}/`;
+const ld=[{'@type':'WebApplication',name:t.name,url,applicationCategory:'UtilitiesApplication',operatingSystem:'Any',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+{'@type':'FAQPage',mainEntity:s.faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))},
+{'@type':'BreadcrumbList',itemListElement:[['Home',SITE+'/'],[cat.name,`${SITE}/category/${cat.slug}/`],[t.name,url]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))}];
+const api=API_OF[t.slug];const spec=api?JSON.stringify({name:api,description:TOOLS[api].d,inputSchema:schemaOf(api)}):'';
+const link=`<a href="${url}">${t.name} - WorldsBestFreeTools</a>`;
+---
+<Base md={`/md/${t.slug}.md`} title={s.title} desc={s.desc} path={`/${t.slug}/`} ld={ld}>
+<p class="crumbs"><a href="/">Home</a> / <a href={`/category/${cat.slug}/`}>{cat.name}</a> / {t.name}</p>
+<h1>{t.name}</h1><p class="lead">{s.desc}</p>
+<section class="tool" id="tool" data-engine={t.engine} data-p={t.p} aria-label={t.name}><noscript>Please enable JavaScript to use this tool.</noscript></section>
+<h2>How to use the {t.name.toLowerCase()}</h2>
+<ol><li>Enter your values or choose your file above.</li><li>See the result instantly, right in your browser.</li><li>Copy or download the result.</li></ol>
+{api?<section><h2>Call it from code or an AI agent</h2><p>REST (no key): <code>GET /api/v1/{api}</code> · MCP server: <code>/api/mcp</code> · <a href="/openapi.json">OpenAPI</a></p><ul>{Object.entries(TOOLS[api].p).map(([pk,pv])=><li><code>{pk}</code> ({pv.type}): {pv.description}</li>)}</ul></section>:null}
+<h2>Frequently asked questions</h2>{s.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}
+<h2>People also search for</h2><ul class="tags">{s.queries.map(q=><li>{q}</li>)}</ul>
+{rel.length>0?<section><h2>Related tools</h2><div class="grid">{rel.map(r=><a href={`/${r.slug}/`}>{r.name}</a>)}</div></section>:null}
+<h2>Link to this tool</h2><p>Found it useful? Link to it from your site or blog; backlinks are welcome and always followed.</p><input class="search" style="margin:0" readonly value={link} aria-label="HTML link code" onclick="this.select()">
+</Base>
+{api?<script type="application/json" id="wm" set:html={spec}></script>:null}
+<script>import {registerWebMcp} from '../scripts/webmcp.js';const wm=document.getElementById('wm');if(wm)registerWebMcp(JSON.parse(wm.textContent));</script>
+<script>import {mount} from '../scripts/engines.js';const el=document.getElementById('tool');if(el&&el.dataset.engine)mount(el,el.dataset.engine,el.dataset.p);</script>
