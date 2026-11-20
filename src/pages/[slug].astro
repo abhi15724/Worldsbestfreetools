@@ -18,7 +18,6 @@ const link=`<a href="${url}">${t.name} - WorldsBestFreeTools</a>`;
 <section class="tool" id="tool" data-engine={t.engine} data-p={t.p} aria-label={t.name}><noscript>Please enable JavaScript to use this tool.</noscript></section>
 <h2>How to use the {t.name.toLowerCase()}</h2>
 <ol><li>Enter your values or choose your file above.</li><li>See the result instantly, right in your browser.</li><li>Copy or download the result.</li></ol>
-{api?<section><h2>Call it from code or an AI agent</h2><p>REST (no key): <code>GET /api/v1/{api}</code> · MCP server: <code>/api/mcp</code> · <a href="/openapi.json">OpenAPI</a></p><ul>{Object.entries(TOOLS[api].p).map(([pk,pv])=><li><code>{pk}</code> ({pv.type}): {pv.description}</li>)}</ul></section>:null}
 <h2>Frequently asked questions</h2>{s.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}
 <h2>People also search for</h2><ul class="tags">{s.queries.map(q=><li>{q}</li>)}</ul>
 {rel.length>0?<section><h2>Related tools</h2><div class="grid">{rel.map(r=><a href={`/${r.slug}/`}>{r.name}</a>)}</div></section>:null}

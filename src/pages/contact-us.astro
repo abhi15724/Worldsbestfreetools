@@ -1,0 +1,46 @@
+---
+import Page from '../layouts/Page.astro';
+import {SITE} from '../data/tools.mjs';
+const ld=[{'@type':'ContactPage',name:'Contact WorldsBestFreeTools',url:SITE+'/contact-us/'}];
+---
+<Page title="Contact Us | WorldsBestFreeTools" desc="Contact WorldsBestFreeTools: report a problem, suggest a new free tool or send feedback. Fill in your name, email and message and we will reply." path="/contact-us/" ld={ld}>
+<h1>Contact us</h1>
+<p class="lead">Found a mistake, want a new tool, or just have a question? Send us a message and we will get back to you by email.</p>
+
+<form class="tool" id="cf" method="post" action="/api/contact" novalidate>
+<label>Your name<input name="name" id="name" type="text" required maxlength="100" autocomplete="name"></label>
+<label>Your email<input name="email" id="email" type="email" required maxlength="200" autocomplete="email"></label>
+<label>Your message<textarea name="message" id="message" required minlength="10" maxlength="5000" rows="7" placeholder="Tell us which tool or page you are writing about and what happened."></textarea></label>
+<div style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave this empty<input name="website" id="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+<button type="submit" id="send">Send message</button>
+<div class="out" id="status" role="status" aria-live="polite" hidden></div>
+</form>
+
+<h2>Before you write</h2>
+<ul>
+<li>When reporting a wrong result, tell us the tool name and the values you entered.
+</li>
+<li>Please do not include passwords, bank details, ID numbers or other sensitive information in your message.</li>
+<li>We read every message, but we cannot give personal financial, tax, legal or medical advice.</li>
+<li>We use your name and email only to reply to you. See the <a href="/privacy-policy/">Privacy Policy</a> for details.</li>
+</ul>
+</Page>
+<script>
+const f=document.getElementById('cf'),st=document.getElementById('status'),btn=document.getElementById('send');
+const show=(m,ok)=>{st.hidden=false;st.textContent=m;st.style.borderLeft='4px solid '+(ok?'#1a7f37':'#c8301a')};
+if(new URLSearchParams(location.search).get('sent')==='1')show('Thank you. Your message has been sent and we will reply by email.',true);
+if(new URLSearchParams(location.search).get('error'))show('Sorry, your message could not be sent. Please check the form and try again.',false);
+f.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const d=Object.fromEntries(new FormData(f));
+ if(!d.name.trim()||!/^\S+@\S+\.\S+$/.test(d.email)||d.message.trim().length<10){show('Please enter your name, a valid email address and a message of at least 10 characters.',false);return}
+ btn.disabled=true;btn.textContent='Sending…';
+ try{
+  const r=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify(d)});
+  const j=await r.json().catch(()=>({}));
+  if(r.ok){show('Thank you. Your message has been sent and we will reply by email.',true);f.reset()}
+  else show(j.error||'Sorry, your message could not be sent. Please try again later.',false)
+ }catch(_){show('Network problem. Please check your connection and try again.',false)}
+ btn.disabled=false;btn.textContent='Send message';
+});
+</script>

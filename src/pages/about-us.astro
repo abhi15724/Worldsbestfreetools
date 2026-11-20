@@ -1,0 +1,57 @@
+---
+import Page from '../layouts/Page.astro';
+import {cats,live,tools,SITE} from '../data/tools.mjs';
+const by=cats.map(c=>({...c,n:live.filter(t=>t.cat===c.slug).length})).filter(c=>c.n>0);
+const ld=[{'@type':'AboutPage',name:'About WorldsBestFreeTools',url:SITE+'/about-us/',mainEntity:{'@type':'Organization',name:'WorldsBestFreeTools',url:SITE+'/'}}];
+---
+<Page title="About Us | WorldsBestFreeTools" desc="WorldsBestFreeTools offers free online calculators, converters, image, PDF and QR tools that run in your browser with no signup. Learn who we are and how we work." path="/about-us/" ld={ld}>
+<h1>About WorldsBestFreeTools</h1>
+<p class="lead">Free online tools that are fast, private and honest about what they do. No signup, no watermarks, no paywall.</p>
+
+<h2>What we do</h2>
+<p>WorldsBestFreeTools is a collection of {live.length} free online tools for everyday tasks: loan, investment and tax calculators, image and PDF utilities, QR code generators, unit and date converters, text and font tools, developer helpers and more. Each tool has its own page where you enter your values or choose your file and get the result straight away.</p>
+<p>We started with a simple frustration: most "free" tool sites ask you to create an account, upload your private files to a server, cover the result in watermarks, or bury the one button you need under pop-ups. We wanted a site where you open the page, do the job in a few seconds and leave.</p>
+
+<h2>Our principles</h2>
+<ul>
+<li><b>Free, with no hidden catch.</b> You do not need an account or a card to use any tool, and results are not watermarked.</li>
+<li><b>Your data stays with you.</b> Where possible, tools run entirely inside your own browser. Your PDFs, photos and numbers are processed on your device and are not uploaded to us. The few exceptions are described plainly in our <a href="/privacy-policy/">Privacy Policy</a>.</li>
+<li><b>Clear and accurate.</b> Calculators use standard, published formulas. Where a result is an estimate, or depends on rules that change (such as tax slabs), the tool says so next to the result.</li>
+<li><b>Fast and light.</b> Pages are mostly static, load quickly on slow connections and work on phones as well as desktops.</li>
+<li><b>Open to everyone.</b> A built-in translator lets you read the site in many languages, and finance calculators let you pick your own currency.</li>
+</ul>
+
+<h2>What you will find here</h2>
+<table><thead><tr><th>Category</th><th>Live tools</th></tr></thead><tbody>
+{by.map(c=><tr><td><a href={`/category/${c.slug}/`}>{c.name}</a></td><td>{c.n}</td></tr>)}
+</tbody></table>
+<p>We add new tools regularly, and we only publish a tool page once the tool actually works. Planned tools are not listed as finished pages, so you will not land on empty "coming soon" content.</p>
+
+<h2>How our tools work</h2>
+<h3>In your browser</h3>
+<p>Most tools, including the calculators, image compressor, PDF tools, QR generator and converters, run as JavaScript in your browser. When you pick a file, your browser reads it and produces the result locally. Some larger tools (for example background removal, OCR text recognition, video compression and the 3D depth tool) download a model or library the first time you use them, then do the processing on your device.</p>
+<h3>Calculators and estimates</h3>
+<p>Our finance calculators show results based on the numbers you enter and standard formulas for EMI, compound interest, SIP, CAGR and similar measures. Real-world products such as bank loans, mutual funds and tax filings can differ because of fees, rounding, compounding conventions and changes in rules. Please treat results as a guide and confirm important decisions with your lender, adviser or the official source. See our <a href="/terms-and-conditions/">Terms and Conditions</a> for the full disclaimer.</p>
+<h3>Languages and currencies</h3>
+<p>The language menu in the header uses Google Translate to translate the page you are viewing. Machine translation can be imperfect, so the English text is the reference version. The currency menu on finance calculators changes the symbol and number format only; it does not convert amounts.</p>
+<h3>For developers and AI agents</h3>
+<p>Many calculators are also available through a free, read-only JSON API and an MCP server, so developers and AI assistants can use the same calculations. Details are on each supported tool's page and in our <a href="/openapi.json">OpenAPI description</a>.</p>
+
+<h2>How we keep quality high</h2>
+<ul>
+<li>We test each tool with known examples before publishing it.</li>
+<li>Rules that change over time, such as income tax slabs, are labelled with the year they apply to so you can tell if something looks out of date.</li>
+<li>We read every message sent through our <a href="/contact-us/">Contact Us</a> page. If you report a wrong result, we investigate and fix it.</li>
+</ul>
+
+<h2>How the site is run</h2>
+<p>WorldsBestFreeTools is an independent project. The tools are free to use. Running a website has costs, so we may in future add clearly labelled advertising or sponsorship. If we do, we will keep it away from tool results, never sell your personal data, and update our Privacy Policy before the change takes effect.</p>
+
+<h2>Be part of it</h2>
+<ul>
+<li><b>Suggest a tool:</b> tell us what you wish existed through the <a href="/contact-us/">contact form</a>.</li>
+<li><b>Report a problem:</b> if a result looks wrong or a page does not work on your device, tell us which tool and what you entered.</li>
+<li><b>Share us:</b> you are welcome to link to any tool from your website, blog or classroom page. Links are free and always welcome.</li>
+</ul>
+<p>Thank you for using WorldsBestFreeTools.</p>
+</Page>
