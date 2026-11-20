@@ -1,5 +1,6 @@
 ---
 import {cats,SITE} from '../data/tools.mjs';
+import {langGroups,langCodes} from '../data/languages.mjs';
 const {title,desc,path='/',noindex=false,ld=[],md=''}=Astro.props;
 const url=SITE+path;
 ---
@@ -10,9 +11,9 @@ const url=SITE+path;
 <meta name="twitter:card" content="summary"><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23c8301a'/><path d='M8 10h16M8 16h16M8 22h10' stroke='white' stroke-width='3' stroke-linecap='round'/></svg>">
 {ld.map(o=><script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org',...o})}/>)}
 </head><body>
-<header><a class="logo" href="/">Worlds<b>Best</b>FreeTools</a><nav><a href="/category/finance/">Calculators</a><a href="/category/image/">Image</a><a href="/category/pdf/">PDF</a><a href="/category/qr/">QR</a></nav></header>
+<header><a class="logo" href="/">Worlds<b>Best</b>FreeTools</a><nav><a href="/category/finance/">Calculators</a><a href="/category/image/">Image</a><a href="/category/pdf/">PDF</a><a href="/category/qr/">QR</a></nav><select id="lang" class="notranslate" translate="no" aria-label="Translate this website / Language"><option value="en">🌐 English</option>{langGroups.map(([g,ls])=><optgroup label={g}>{ls.map(([c,n])=><option value={c}>{n}</option>)}</optgroup>)}</select></header><div id="google_translate_element" hidden></div>
 <main><slot/></main>
-<footer><div class="wrap"><p><b>WorldsBestFreeTools</b>: free online tools that run in your browser. Link to any tool freely; we welcome backlinks.</p><div class="fcats">{cats.map(c=><a href={`/category/${c.slug}/`}>{c.name}</a>)}</div></div></footer>
+<footer><div class="wrap"><p><b>WorldsBestFreeTools</b>: free online tools that run in your browser. Link to any tool freely; we welcome backlinks. Page translation is automatic and powered by Google Translate, so wording may be imperfect.</p><div class="fcats">{cats.map(c=><a href={`/category/${c.slug}/`}>{c.name}</a>)}</div></div></footer>
 <style is:global>
 :root{--bg:#fbfaf7;--ink:#15171c;--mut:#5d6470;--line:#e4e1d8;--card:#fff;--acc:#c8301a;--r:12px}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
@@ -30,4 +31,24 @@ main,.wrap{max-width:1120px;margin:0 auto;padding:32px 16px}h1{font-size:clamp(1
 .tags{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none}.tags li{background:#efece3;border-radius:99px;padding:4px 12px;font-size:.9rem}.row{display:flex;gap:8px;flex-wrap:wrap}.ruler{position:relative;height:70px;background:#fff7d6;border:1px solid #999;overflow:hidden}.ruler span{position:absolute;top:34px;font-size:11px}
 footer{border-top:1px solid var(--line);background:var(--card);color:var(--mut);margin-top:48px}.fcats{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><script is:inline define:vars={{codes:langCodes.join(',')}}>
+(function(){
+var sel=document.getElementById('lang');if(!sel)return;
+function getLang(){var m=document.cookie.match(/(?:^|; )googtrans=\/[^\/]*\/([^;]+)/);return m?decodeURIComponent(m[1]):'en'}
+function setCookie(v){var h=location.hostname,exp=v?'':';expires=Thu, 01 Jan 1970 00:00:00 GMT',val=v?'/en/'+v:'';
+ document.cookie='googtrans='+val+';path=/'+exp;
+ if(h.indexOf('.')>-1){document.cookie='googtrans='+val+';path=/;domain='+h+exp;document.cookie='googtrans='+val+';path=/;domain=.'+h.replace(/^www\./,'')+exp}}
+function load(){window.googleTranslateElementInit=function(){new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:codes,autoDisplay:false},'google_translate_element')};
+ var s=document.createElement('script');s.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';s.async=true;document.head.appendChild(s)}
+var cur=getLang();
+if(cur!=='en'&&codes.split(',').indexOf(cur)>-1){sel.value=cur;load()}
+sel.addEventListener('change',function(){var v=sel.value;try{localStorage.setItem('wbft-lang',v)}catch(e){}
+ setCookie(v==='en'?'':v);location.reload()});
+})();
+</script>
+<style is:global>
+.skiptranslate iframe,.goog-te-banner-frame,#goog-gt-tt,.goog-tooltip,.goog-te-balloon-frame{display:none!important}
+body{top:0!important}.goog-text-highlight{background:none!important;box-shadow:none!important}
+#lang{font:inherit;font-size:.9rem;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);max-width:200px;cursor:pointer}
+header{flex-wrap:wrap}
 </style></body></html>
