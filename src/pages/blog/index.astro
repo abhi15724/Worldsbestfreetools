@@ -1,0 +1,16 @@
+---
+import Page from '../../layouts/Page.astro';
+import {posts} from '../../lib/blog.mjs';
+import {SITE,live} from '../../data/tools.mjs';
+import {iconFor} from '../../lib/icons.mjs';
+const ic=p=>iconFor(live.find(t=>t.slug===p.tools[0])||{slug:p.slug,cat:p.cat});
+const ld=[{'@type':'Blog',name:'WorldsBestFreeTools Blog',url:SITE+'/blog/',description:'Practical guides to calculators, PDF, image and QR tools.',blogPost:posts.map(p=>({'@type':'BlogPosting',headline:p.title,url:`${SITE}/blog/${p.slug}/`,datePublished:p.date}))}];
+---
+<Page title="Blog: Guides to Calculators, PDF, Image & QR Tools | WorldsBestFreeTools" desc="Plain-English guides with worked examples: how EMI, SIP, GST and CAGR work, how to compress images, merge PDFs, make QR codes and create strong passwords." path="/blog/" ld={ld}>
+<h1>Blog</h1>
+<p class="lead">Practical guides with worked examples, written to help you get the job done and understand the numbers behind each tool.</p>
+<div class="grid" style="margin-top:24px">
+{posts.map(p=><a href={`/blog/${p.slug}/`}><Fragment set:html={ic(p)}/><span>{p.title}</span><small>{p.minutes} min read · {p.date}</small></a>)}
+</div>
+<p style="margin-top:32px"><small>Subscribe with RSS: <a href="/blog/rss.xml">/blog/rss.xml</a></small></p>
+</Page>

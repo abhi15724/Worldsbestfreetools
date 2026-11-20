@@ -2,9 +2,11 @@
 import Base from '../layouts/Base.astro';
 import {cats,live,seo,SITE} from '../data/tools.mjs';
 import {API_OF} from '../lib/agents.mjs';
+import {postFor} from '../lib/blog.mjs';
+import {iconFor} from '../lib/icons.mjs';
 import {TOOLS,schemaOf} from '../../api/_calc.js';
 export async function getStaticPaths(){const {live}=await import('../data/tools.mjs');return live.map(x=>({params:{slug:x.slug},props:{t:x}}))}
-const {t}=Astro.props;const s=seo(t);const cat=cats.find(c=>c.slug===t.cat);
+const {t}=Astro.props;const guide=postFor(t.slug);const s=seo(t);const cat=cats.find(c=>c.slug===t.cat);
 const rel=live.filter(x=>x.cat===t.cat&&x.slug!==t.slug).slice(0,6);const url=`${SITE}/${t.slug}/`;
 const ld=[{'@type':'WebApplication',name:t.name,url,applicationCategory:'UtilitiesApplication',operatingSystem:'Any',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
 {'@type':'FAQPage',mainEntity:s.faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))},
@@ -14,13 +16,14 @@ const link=`<a href="${url}">${t.name} - WorldsBestFreeTools</a>`;
 ---
 <Base md={`/md/${t.slug}.md`} title={s.title} desc={s.desc} path={`/${t.slug}/`} ld={ld}>
 <p class="crumbs"><a href="/">Home</a> / <a href={`/category/${cat.slug}/`}>{cat.name}</a> / {t.name}</p>
-<h1>{t.name}</h1><p class="lead">{s.desc}</p>
+<div class="hero"><Fragment set:html={iconFor(t,'big')}/><h1>{t.name}</h1><p class="lead">{s.desc}</p></div>
 <section class="tool" id="tool" data-engine={t.engine} data-p={t.p} aria-label={t.name}><noscript>Please enable JavaScript to use this tool.</noscript></section>
+{guide&&<p class="lead" style="font-size:1rem">Want to understand the result? Read our guide: <a href={`/blog/${guide.slug}/`}>{guide.title}</a>.</p>}
 <h2>How to use the {t.name.toLowerCase()}</h2>
 <ol><li>Enter your values or choose your file above.</li><li>See the result instantly, right in your browser.</li><li>Copy or download the result.</li></ol>
 <h2>Frequently asked questions</h2>{s.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}
 <h2>People also search for</h2><ul class="tags">{s.queries.map(q=><li>{q}</li>)}</ul>
-{rel.length>0?<section><h2>Related tools</h2><div class="grid">{rel.map(r=><a href={`/${r.slug}/`}>{r.name}</a>)}</div></section>:null}
+{rel.length>0?<section><h2>Related tools</h2><div class="grid">{rel.map(r=><a href={`/${r.slug}/`}><Fragment set:html={iconFor(r)}/><span>{r.name}</span></a>)}</div></section>:null}
 <h2>Link to this tool</h2><p>Found it useful? Link to it from your site or blog; backlinks are welcome and always followed.</p><input class="search" style="margin:0" readonly value={link} aria-label="HTML link code" onclick="this.select()">
 </Base>
 {api?<script type="application/json" id="wm" set:html={spec}></script>:null}

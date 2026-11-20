@@ -1,13 +1,13 @@
 ---
 import Base from './Base.astro';
-const {title,desc,path,ld=[]}=Astro.props;
+const {title,desc,path,ld=[],type='website',md=''}=Astro.props;
 ---
-<Base title={title} desc={desc} path={path} ld={ld}>
+<Base title={title} desc={desc} path={path} ld={ld} type={type} md={md}>
 <article class="prose"><slot/></article>
 </Base>
 <style is:global>
 .prose{max-width:760px}.prose h1{margin-bottom:8px}.prose h2{margin-top:36px}.prose h3{font-size:1.1rem;margin:24px 0 8px}
 .prose p,.prose li{max-width:70ch}.prose ul,.prose ol{padding-left:22px}.prose li{margin:6px 0}
 .prose .meta{color:var(--mut);font-size:.95rem;margin:0 0 24px}.prose .note{background:#f3f1ea;border-left:4px solid var(--acc);padding:12px 16px;border-radius:8px;margin:20px 0}
-.prose table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.95rem}.prose th,.prose td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}.prose th{background:#efece3}
+.prose .toc{background:#f3f1ea;border-radius:8px;padding:12px 18px;margin:20px 0}.prose .toc summary{cursor:pointer;font-weight:700}.prose .toc ol{margin:8px 0 0}.prose .cta{background:var(--ink);color:#fff;border-radius:12px;padding:18px 20px;margin:24px 0}.prose .cta a{color:#fff;font-weight:700}.prose .cta .btn{background:var(--acc);color:#fff}.prose .byline{color:var(--mut);font-size:.92rem;margin:0 0 8px}.prose .quick{background:#fff;border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:8px;padding:12px 16px}.prose table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.95rem}.prose th,.prose td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}.prose th{background:#efece3}
 </style>

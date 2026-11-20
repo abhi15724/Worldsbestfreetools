@@ -1,0 +1,29 @@
+---
+import Page from '../../layouts/Page.astro';
+import {posts} from '../../lib/blog.mjs';
+import {live,cats,SITE} from '../../data/tools.mjs';
+import {iconFor} from '../../lib/icons.mjs';
+const ic=q=>iconFor(live.find(t=>t.slug===q.tools[0])||{slug:q.slug,cat:q.cat});
+export function getStaticPaths(){return posts.map(p=>({params:{slug:p.slug},props:{p}}))}
+const {p}=Astro.props;const url=`${SITE}/blog/${p.slug}/`;
+const tool=live.find(t=>t.slug===p.tools[0]);const cat=tool&&cats.find(c=>c.slug===tool.cat);
+const toc=p.headings.filter(h=>h.depth===2);
+const more=posts.filter(x=>x.slug!==p.slug).sort((a,b)=>(b.cat===p.cat)-(a.cat===p.cat)).slice(0,4);
+const fmt=d=>new Date(d+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
+const ld=[
+{'@type':'BlogPosting',headline:p.title,description:p.description,url,mainEntityOfPage:url,datePublished:p.date,dateModified:p.updated,wordCount:p.words,inLanguage:'en',articleSection:cat?.name,keywords:(p.keywords||[]).join(', '),author:{'@type':'Organization',name:'WorldsBestFreeTools',url:SITE+'/'},publisher:{'@type':'Organization',name:'WorldsBestFreeTools',url:SITE+'/'}},
+...(p.faq.length?[{'@type':'FAQPage',mainEntity:p.faq.map(f=>({'@type':'Question',name:f.q,acceptedAnswer:{'@type':'Answer',text:f.a}}))}]:[]),
+{'@type':'BreadcrumbList',itemListElement:[['Home',SITE+'/'],['Blog',SITE+'/blog/'],[p.title,url]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))}];
+---
+<Page title={`${p.title} | WorldsBestFreeTools`} desc={p.description} path={`/blog/${p.slug}/`} ld={ld} type="article" md={`/blog/${p.slug}.md`}>
+<p class="crumbs"><a href="/">Home</a> / <a href="/blog/">Blog</a> / {p.title}</p>
+<h1>{p.title}</h1>
+<p class="byline">By WorldsBestFreeTools · Published {fmt(p.date)}{p.updated!==p.date&&` · Updated ${fmt(p.updated)}`} · {p.minutes} min read</p>
+{tool&&<div class="cta">Want the answer right now? <a class="btn" href={`/${tool.slug}/`}>Use the free {tool.name}</a></div>}
+{toc.length>2&&<details class="toc" open><summary>In this article</summary><ol>{toc.map(h=><li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol></details>}
+<p.Content />
+{p.faq.length>0&&<section><h2>Frequently asked questions</h2>{p.faq.map(f=><details><summary>{f.q}</summary><p>{f.a}</p></details>)}</section>}
+{tool&&<div class="cta">Ready to try it? <a class="btn" href={`/${tool.slug}/`}>Open the {tool.name}</a> It is free, needs no signup and runs in your browser.</div>}
+<h2>Keep reading</h2>
+<div class="grid">{more.map(x=><a href={`/blog/${x.slug}/`}><Fragment set:html={ic(x)}/><span>{x.title}</span><small>{x.minutes} min read</small></a>)}</div>
+</Page>

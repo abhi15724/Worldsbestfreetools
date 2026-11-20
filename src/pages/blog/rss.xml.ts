@@ -1,0 +1,4 @@
+import {posts} from '../../lib/blog.mjs';
+import {SITE} from '../../data/tools.mjs';
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+export const GET=()=>new Response(`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WorldsBestFreeTools Blog</title><link>${SITE}/blog/</link><description>Practical guides to calculators, PDF, image and QR tools.</description><language>en</language><atom:link href="${SITE}/blog/rss.xml" rel="self" type="application/rss+xml"/>${posts.map(p=>`<item><title>${esc(p.title)}</title><link>${SITE}/blog/${p.slug}/</link><guid>${SITE}/blog/${p.slug}/</guid><pubDate>${new Date(p.date+'T00:00:00Z').toUTCString()}</pubDate><description>${esc(p.description)}</description></item>`).join('')}</channel></rss>`,{headers:{'content-type':'application/rss+xml; charset=utf-8'}});
