@@ -1,7 +1,7 @@
 import {live,cats} from '../data/tools.mjs';
 import {SITE} from '../lib/agents.mjs';
 import {posts} from '../lib/blog.mjs';
-export const GET=()=>new Response(`# WorldsBestFreeTools
+export const GET=()=>new Response(`# Worlds Best Free Tools (WorldsBestFreeTools, worlds-best-free-tools)
 
 > Free online tools that run in your browser: calculators, PDF, image, QR, font and file converters. No signup. Every tool page also exists as Markdown at /md/<slug>.md, or send "Accept: text/markdown".
 

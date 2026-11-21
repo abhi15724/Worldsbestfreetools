@@ -2,17 +2,32 @@
 import Base from '../layouts/Base.astro';
 import {cats,live,tools,SITE} from '../data/tools.mjs';
 import {iconFor} from '../lib/icons.mjs';
+const faq=[
+['What is Worlds Best Free Tools?',`Worlds Best Free Tools (also written worlds-best-free-tools or WorldsBestFreeTools) is a free collection of ${live.length} online tools: loan, SIP, GST and tax calculators, image and PDF tools, QR code generators, unit converters, fancy text fonts and more.`],
+['Are the tools really free?','Yes. Every tool is free to use, with no signup, no watermark and no hidden limits.'],
+['Do my files get uploaded?','Most tools run entirely in your browser, so your files and numbers stay on your device. The few exceptions, such as the paraphrasing tool and the contact form, are described in the Privacy Policy.'],
+['Can I use the site in my own language?','Yes. The language menu in the header translates the page into many languages, and finance calculators let you pick your own currency.'],
+['Can AI assistants and developers use these tools?','Yes. Many calculators are available through a free read-only API and an MCP server, and every tool page also exists as Markdown for AI agents. See llms.txt and openapi.json.']];
+const ld=[
+{'@type':'WebSite',name:'Worlds Best Free Tools',alternateName:['worlds-best-free-tools','WorldsBestFreeTools','worlds best free tools','World\'s Best Free Tools'],url:SITE+'/',inLanguage:'en',potentialAction:{'@type':'SearchAction',target:{'@type':'EntryPoint',urlTemplate:SITE+'/?q={search_term_string}'},'query-input':'required name=search_term_string'}},
+{'@type':'Organization',name:'Worlds Best Free Tools',alternateName:['worlds-best-free-tools','WorldsBestFreeTools'],url:SITE+'/',logo:{'@type':'ImageObject',url:SITE+'/icon-512.png',width:512,height:512}},
+{'@type':'ItemList',name:'Free online tools',numberOfItems:live.length,itemListElement:live.map((t,i)=>({'@type':'ListItem',position:i+1,name:t.name,url:`${SITE}/${t.slug}/`}))},
+{'@type':'FAQPage',mainEntity:faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))}];
 ---
-<Base md="/md/index.md" title="Free Online Tools: Calculators, PDF, Image, QR & More | WorldsBestFreeTools" desc="Hundreds of free online tools: EMI and SIP calculators, image compressor, QR code generator, fancy fonts, converters and more. No signup, runs in your browser." ld={[{'@type':'WebSite',name:'WorldsBestFreeTools',url:SITE+'/'}]}>
-<h1>Free online tools that just work</h1>
+<Base md="/md/index.md" title="Worlds Best Free Tools | Free Online Calculators, PDF, Image & QR Tools" desc="Worlds Best Free Tools: free online EMI and SIP calculators, image compressor, PDF tools, QR code generator, fancy fonts and converters. No signup, no uploads, runs in your browser." ld={ld}>
+<h1>Worlds Best Free Tools: free online tools that just work</h1>
 <p class="lead">Calculators, converters, image and QR tools. No signup, no uploads, no watermarks. Everything runs in your browser.</p>
 <input class="search" id="q" type="search" placeholder="Search tools, e.g. EMI calculator" aria-label="Search tools">
 <h2>All tools</h2>
 <div class="grid" id="list">{live.map(t=><a href={`/${t.slug}/`}><Fragment set:html={iconFor(t)}/><span>{t.name}</span><small>{cats.find(c=>c.slug===t.cat).name}</small></a>)}</div>
 <h2>Browse by category</h2>
 <div class="grid">{cats.map(c=><a href={`/category/${c.slug}/`}><Fragment set:html={iconFor({slug:c.slug,cat:c.slug})}/><span>{c.name}</span><small>{tools.filter(t=>t.cat===c.slug&&t.live).length} live · {tools.filter(t=>t.cat===c.slug).length} planned</small></a>)}</div>
+<section style="margin-top:40px"><h2>What is Worlds Best Free Tools?</h2><p class="lead" style="max-width:720px">{faq[0][1]} Open a tool, enter your values or choose your file, and get the result straight away.</p>
+<h2>Frequently asked questions</h2>{faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</section>
 </Base>
 <script>
 const q=document.getElementById('q'),a=[...document.querySelectorAll('#list a')];
-q.addEventListener('input',()=>{const v=q.value.toLowerCase();a.forEach(x=>x.style.display=x.textContent.toLowerCase().includes(v)?'':'none')});
+const init=new URLSearchParams(location.search).get('q');
+const run=()=>{const v=q.value.toLowerCase();a.forEach(x=>x.style.display=x.textContent.toLowerCase().includes(v)?'':'none')};
+q.addEventListener('input',run);if(init){q.value=init;run()}
 </script>
