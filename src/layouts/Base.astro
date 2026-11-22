@@ -6,13 +6,13 @@ const {title,desc,path='/',noindex=false,ld=[],md='',type='website',keywords=[],
 const url=SITE+path;
 const BR='Worlds Best Free Tools';
 const ui=LANGS[lang]?.ui||{};const L=(k,d)=>ui[k]||d;const home=lang==='en'?'/':`/${lang}/`;
-const ogLocale=LANGS[lang]?.locale||'en_US';const dir=LANGS[lang]?.dir||'ltr';
+const ogLocale=LANGS[lang]?.locale||'en_US';const dir=LANGS[lang]?.dir||'ltr';const hl=LANGS[lang]?.hreflang||lang;const pgt=LANGS[lang]?.gt||lang;
 const dsc=desc.length>160?desc.slice(0,157).replace(/\s+\S*$/,'')+'…':desc;
 const core=title.replace(/\s*[|\-–]\s*Worlds ?Best ?Free ?Tools\s*$/i,'');
 const full=/worlds ?best ?free ?tools/i.test(core)?core:(`${core} | ${BR}`.length<=72?`${core} | ${BR}`:core);
 const img=SITE+'/og-image.png';
 ---
-<!doctype html><html lang={lang} dir={dir}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang={hl} dir={dir}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{full}</title><meta name="description" content={dsc}>{keywords.length>0&&<meta name="keywords" content={keywords.join(', ')}>}<link rel="canonical" href={url}>{alts.map(a=><link rel="alternate" hreflang={a.lang} href={SITE+a.url}/>)}{alts.length>0&&<link rel="alternate" hreflang="x-default" href={SITE+alts[0].url}/>}{md&&<link rel="alternate" type="text/markdown" href={md}>}<link rel="ard" href="/.well-known/ard.json"><link rel="alternate" type="application/rss+xml" title="WorldsBestFreeTools Blog" href="/blog/rss.xml"><link rel="service-desc" type="application/openapi+json" href="/openapi.json"><link rel="describedby" type="text/plain" href="/llms.txt">
 <meta name="robots" content={noindex?'noindex,follow':'index,follow,max-image-preview:large'}>
 <meta property="og:type" content={type}><meta property="og:site_name" content="Worlds Best Free Tools"><meta property="og:locale" content={ogLocale}><meta property="og:title" content={full}><meta property="og:image" content={img}><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Worlds Best Free Tools: free online calculators, PDF, image and QR tools"><meta property="og:description" content={dsc}><meta property="og:url" content={url}>
@@ -46,10 +46,12 @@ main>ol,main>ul:not(.tags){display:table;margin-left:auto;margin-right:auto}
 details{max-width:760px;margin-left:auto;margin-right:auto}.out{text-align:center}
 .ico{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:12px;background:#f3f1ea;background:color-mix(in srgb,var(--c) 13%,#fff);color:var(--c);flex:none}.ico.big{width:68px;height:68px;border-radius:18px;margin:0 auto 14px}.grid .ico{margin-bottom:2px}
 .hero{display:flex;flex-direction:column;align-items:center;text-align:center}
+.tool-loading{color:var(--mut);text-align:center;margin:0}
+[dir=rtl] .tool[dir=ltr],[dir=rtl] .tool[dir=ltr] *{text-align:left}[dir=rtl] .tool[dir=ltr] .out{text-align:center}
 footer,footer .wrap{text-align:center}
 [dir=rtl] .tool,[dir=rtl] details,[dir=rtl] .prose p,[dir=rtl] main>ol,[dir=rtl] main>ul:not(.tags),[dir=rtl] main>p{text-align:right}[dir=rtl] .crumbs,[dir=rtl] .hero,[dir=rtl] .grid a,[dir=rtl] .lead{text-align:center}[dir=rtl] .tool input[type=number],[dir=rtl] .tool input[type=text],[dir=rtl] .tool textarea{direction:ltr;text-align:left}.fcats{justify-content:center}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-</style><script is:inline define:vars={{codes:langCodes.join(','),alts,pageLang:lang}}>
+</style><script is:inline define:vars={{codes:langCodes.join(','),alts,pageLang:pgt}}>
 (function(){
 var sel=document.getElementById('lang');if(!sel)return;
 function getLang(){var m=document.cookie.match(/(?:^|; )googtrans=\/[^\/]*\/([^;]+)/);return m?decodeURIComponent(m[1]):'en'}
@@ -61,7 +63,7 @@ function load(){window.googleTranslateElementInit=function(){new google.translat
 var cur=getLang();
 if(cur!=='en'&&codes.split(',').indexOf(cur)>-1){sel.value=cur;load()}
 if(pageLang!=='en'&&cur==='en'){for(var i=0;i<sel.options.length;i++)if(sel.options[i].value===pageLang){sel.value=pageLang;break}}
-sel.addEventListener('change',function(){var v=sel.value;var a=(alts||[]).filter(function(x){return x.lang===v})[0];if(a){setCookie('');location.href=a.url;return}if(v==='en'&&pageLang!=='en'){setCookie('');location.href=(alts&&alts.length)?alts[0].url:'/';return}try{localStorage.setItem('wbft-lang',v)}catch(e){}
+sel.addEventListener('change',function(){var v=sel.value;var a=(alts||[]).filter(function(x){return x.gt===v})[0];if(a){setCookie('');location.href=a.url;return}if(v==='en'&&pageLang!=='en'){setCookie('');location.href=(alts&&alts.length)?alts[0].url:'/';return}try{localStorage.setItem('wbft-lang',v)}catch(e){}
  setCookie(v==='en'?'':v);location.reload()});
 })();
 </script>

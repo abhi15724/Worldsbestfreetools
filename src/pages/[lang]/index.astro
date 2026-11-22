@@ -1,16 +1,17 @@
 ---
 import Base from '../../layouts/Base.astro';
-import {LANGS} from '../../i18n/index.mjs';
+import {LANGS,homeAlts} from '../../i18n/index.mjs';
 import {live,SITE} from '../../data/tools.mjs';
 import {iconFor} from '../../lib/icons.mjs';
 export function getStaticPaths(){return Object.keys(LANGS).map(lang=>({params:{lang},props:{lang}}))}
 const {lang}=Astro.props;const L=LANGS[lang],U=L.ui;
 const items=Object.entries(L.tools).map(([slug,X])=>({slug,X,t:live.find(t=>t.slug===slug)})).filter(i=>i.t);
-const ld=[{'@type':'WebSite',name:'Worlds Best Free Tools',url:`${SITE}/${lang}/`,inLanguage:lang},
+const ld=[{'@type':'WebSite',name:'Worlds Best Free Tools',url:`${SITE}/${lang}/`,inLanguage:L.hreflang},
 {'@type':'ItemList',name:U.home_h1,itemListElement:items.map((i,n)=>({'@type':'ListItem',position:n+1,name:i.X.name,url:`${SITE}/${lang}/${i.slug}/`}))}];
 ---
-<Base lang={lang} alts={[{lang:'en',url:'/'},...Object.keys(LANGS).map(k=>({lang:k,url:`/${k}/`}))]} title={U.home_title} desc={U.home_desc} path={`/${lang}/`} keywords={U.home_kw} ld={ld}>
+<Base lang={lang} alts={homeAlts()} title={U.home_title} desc={U.home_desc} path={`/${lang}/`} keywords={U.home_kw} ld={ld}>
 <div class="hero"><h1>{U.home_h1}</h1><p class="lead">{U.home_lead}</p></div>
 <div class="grid" style="margin-top:28px">{items.map(i=><a href={`/${lang}/${i.slug}/`}><Fragment set:html={iconFor(i.t)}/><span>{i.X.name}</span></a>)}</div>
 <p style="margin-top:32px"><a href="/" hreflang="en" lang="en">{U.more_en}</a></p>
+<p><small>{homeAlts().filter(a=>a.code!==lang).map((a,n)=><>{n>0?' · ':''}<a href={a.url} hreflang={a.lang} lang={a.lang}>{a.name}</a></>)}</small></p>
 </Base>

@@ -19,8 +19,8 @@ const link=`<a href="${url}">${t.name} - Worlds Best Free Tools</a>`;
 <Base md={`/md/${t.slug}.md`} title={s.title} desc={s.desc} path={`/${t.slug}/`} ld={ld} keywords={s.keywords} alts={altsFor(t.slug)}>
 <p class="crumbs"><a href="/">Home</a> / <a href={`/category/${cat.slug}/`}>{cat.name}</a> / {t.name}</p>
 <div class="hero"><Fragment set:html={iconFor(t,'big')}/><h1>{t.name}</h1><p class="lead">{s.desc}</p></div>
-{altsFor(t.slug).length>0&&<p style="text-align:center"><small>Also available in: {altsFor(t.slug).filter(a=>a.lang!=='en').map((a,n)=><><a href={a.url} hreflang={a.lang} lang={a.lang}>{LANGS[a.lang].name}</a>{n>0?', ':''}</>)}</small></p>}
-<section class="tool" id="tool" data-engine={t.engine} data-p={t.p} aria-label={t.name}><noscript>Please enable JavaScript to use this tool.</noscript></section>
+{altsFor(t.slug).length>0&&<p style="text-align:center"><small>Also available in: {altsFor(t.slug).filter(a=>a.lang!=='en').map((a,n)=><>{n>0?' · ':''}<a href={a.url} hreflang={a.lang} lang={a.lang}>{a.name}</a></>)}</small></p>}
+<section class="tool" id="tool" data-engine={t.engine} data-p={t.p} aria-label={t.name}><noscript>Please enable JavaScript to use this tool.</noscript><p class="tool-loading">Loading tool…</p></section>
 {guide&&<p class="lead" style="font-size:1rem">Want to understand the result? Read our guide: <a href={`/blog/${guide.slug}/`}>{guide.title}</a>.</p>}
 {C?<>
 <h2>About the {t.name.toLowerCase()}</h2>{C.a.map(p=><p>{p}</p>)}

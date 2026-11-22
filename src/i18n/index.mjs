@@ -1,5 +1,12 @@
+import {LOCALES} from './locales.mjs';
 import hi from './hi.mjs';
 import es from './es.mjs';
-// Register every translated language here. Each one automatically gets /<code>/ pages, hreflang links and sitemap entries.
-export const LANGS={hi,es};
-export const altsFor=slug=>{const a=[{lang:'en',url:`/${slug}/`}];for(const [k,L] of Object.entries(LANGS))if(L.tools[slug])a.push({lang:k,url:`/${k}/${slug}/`});return a.length>1?a:[]};
+import ptbr from './pt-br.mjs';
+import id from './id.mjs';
+import ar from './ar.mjs';
+// Every language registered in locales.mjs gets /<code>/ home + tool pages, hreflang links, sitemap entries and llms.txt entries automatically.
+const MOD={hi,es,'pt-br':ptbr,id,ar};
+export const LANGS=Object.fromEntries(LOCALES.map(m=>[m.code,{...m,...MOD[m.code]}]));
+const EN={lang:'en',code:'en',gt:'en',name:'English'};
+export const altsFor=slug=>{const a=[{...EN,url:`/${slug}/`}];for(const [k,L] of Object.entries(LANGS))if(L.tools[slug])a.push({lang:L.hreflang,code:k,gt:L.gt,name:L.name,url:`/${k}/${slug}/`});return a.length>1?a:[]};
+export const homeAlts=()=>[{...EN,url:'/'},...Object.entries(LANGS).map(([k,L])=>({lang:L.hreflang,code:k,gt:L.gt,name:L.name,url:`/${k}/`}))];
