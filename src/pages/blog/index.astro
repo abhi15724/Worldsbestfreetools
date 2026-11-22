@@ -6,7 +6,7 @@ import {iconFor} from '../../lib/icons.mjs';
 const ic=p=>iconFor(live.find(t=>t.slug===p.tools[0])||{slug:p.slug,cat:p.cat});
 const ld=[{'@type':'Blog',name:'WorldsBestFreeTools Blog',url:SITE+'/blog/',description:'Practical guides to calculators, PDF, image and QR tools.',blogPost:posts.map(p=>({'@type':'BlogPosting',headline:p.title,url:`${SITE}/blog/${p.slug}/`,datePublished:p.date}))}];
 ---
-<Page title="Blog: Guides to Calculators, PDF, Image & QR Tools | WorldsBestFreeTools" desc="Plain-English guides with worked examples: how EMI, SIP, GST and CAGR work, how to compress images, merge PDFs, make QR codes and create strong passwords." path="/blog/" ld={ld}>
+<Page title="Blog: Guides to Calculators, PDF, Image & QR Tools | WorldsBestFreeTools" desc="Plain-English guides with worked examples: how EMI, SIP, GST and CAGR work, how to compress images, merge PDFs, make QR codes and create strong passwords." path="/blog/" ld={ld} keywords={["free tools blog","how to calculate EMI","how to calculate GST","how to compress an image","how to merge PDF files","how to create a QR code","strong password generator","worlds best free tools"]}>
 <h1>Blog</h1>
 <p class="lead">Practical guides with worked examples, written to help you get the job done and understand the numbers behind each tool.</p>
 <div class="grid" style="margin-top:24px">

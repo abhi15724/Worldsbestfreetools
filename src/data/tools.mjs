@@ -1,3 +1,4 @@
+import {KW} from './keywords.mjs';
 // cat|slug|Name|engine|param  -> engine set = LIVE (gets a page + sitemap entry). Empty engine = planned (no page yet, avoids thin content).
 const C=`pdf|PDF Tools
 image|Image Tools
@@ -124,8 +125,11 @@ export const cats=C.split('\n').map(l=>{const[slug,name]=l.split('|');return{slu
 export const tools=T.split('\n').map(l=>{const[cat,slug,name,engine='',p='']=l.split('|');return{cat,slug,name,engine,p,live:!!engine}});
 export const live=tools.filter(t=>t.live);
 export const SITE='https://worldsbestfreetools.online';
-export function seo(t){const n=t.name,l=n.toLowerCase();return{
+export function seo(t){const n=t.name,l=n.toLowerCase();const k=KW[t.slug]||{a:[l],x:[]};
+const al=k.a.filter(a=>a!==l);let desc;for(let i=al.length;i>=0;i--){desc=`Free ${l} online${i?': '+al.slice(0,i).join(', '):''}. No signup, fast, and your data stays in your browser. Worlds Best Free Tools.`;if(desc.length<=160)break}
+return{
 title:`${n} – Free Online, No Signup`,
-desc:`Use this free ${l} online: fast, accurate, no signup, and your data stays in your browser. Works on mobile and desktop.`,
-queries:[`${l} online free`,`${l} without signup`,`best ${l}`,`how to use a ${l}`,`${l} on mobile`],
+desc,
+keywords:[...new Set([...k.a,...k.x.slice(0,6),'worlds best free tools'])].slice(0,10),
+queries:k.x.length?k.x.slice(0,8):[`${l} online free`,`${l} without signup`,`best ${l}`,`how to use a ${l}`,`${l} on mobile`],
 faq:[[`Is this ${l} free?`,`Yes. The ${l} is 100% free with no limits, watermarks or hidden charges.`],[`Do I need to sign up?`,`No account is needed. Open the page and use it right away.`],[`Is my data safe?`,`Everything runs inside your browser. Your files and inputs are never uploaded to our servers.`],[`Does it work on my phone?`,`Yes. The tool is responsive and works in any modern mobile or desktop browser.`]]}}

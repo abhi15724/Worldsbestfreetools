@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import {LANGS,altsFor} from '../../i18n/index.mjs';
+import {live,SITE} from '../../data/tools.mjs';
+import {iconFor} from '../../lib/icons.mjs';
+export function getStaticPaths(){const out=[];for(const [lang,L] of Object.entries(LANGS))for(const slug of Object.keys(L.tools)){const t=live.find(x=>x.slug===slug);if(t)out.push({params:{lang,slug},props:{lang,t}})}return out}
+const {lang,t}=Astro.props;const L=LANGS[lang],X=L.tools[t.slug],U=L.ui;
+const url=`${SITE}/${lang}/${t.slug}/`;
+const ld=[
+{'@type':'WebApplication',name:X.name,url,description:X.desc,keywords:X.kw.join(', '),inLanguage:lang,applicationCategory:'UtilitiesApplication',operatingSystem:'Any',offers:{'@type':'Offer',price:'0',priceCurrency:'INR'}},
+{'@type':'FAQPage',inLanguage:lang,mainEntity:X.faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))},
+{'@type':'BreadcrumbList',itemListElement:[[U.home,`${SITE}/${lang}/`],[X.name,url]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))}];
+---
+<Base lang={lang} alts={altsFor(t.slug)} title={X.title} desc={X.desc} path={`/${lang}/${t.slug}/`} keywords={[...X.kw,'worlds best free tools']} ld={ld}>
+<p class="crumbs"><a href={`/${lang}/`}>{U.home}</a> / {X.name}</p>
+<div class="hero"><Fragment set:html={iconFor(t,'big')}/><h1>{X.name}</h1><p class="lead">{X.desc}</p></div>
+<p style="text-align:center"><a href={`/${t.slug}/`} hreflang="en" lang="en">{U.english}</a></p>
+<section class="tool" id="tool" lang="en" data-engine={t.engine} data-p={t.p} aria-label={X.name}><noscript>Please enable JavaScript to use this tool.</noscript></section>
+<p style="text-align:center"><small>{U.english_note}</small></p>
+<h2>{(U.about_fmt||'{n} '+U.about_h).replace('{n}',X.name)}</h2>{X.a.map(p=><p>{p}</p>)}
+<h2>{U.how_h}</h2><ol>{X.s.map(x=><li>{x}</li>)}</ol>
+{X.t.length>0&&<><h2>{U.tips_h}</h2><ul>{X.t.map(x=><li>{x}</li>)}</ul></>}
+<h2>{U.faq_h}</h2>{X.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}
+<p style="margin-top:28px;text-align:center"><a href={`/${lang}/`}>{U.home}</a></p>
+</Base>
+<script>import {mount} from '../../scripts/engines.js';const el=document.getElementById('tool');if(el&&el.dataset.engine)mount(el,el.dataset.engine,el.dataset.p);</script>

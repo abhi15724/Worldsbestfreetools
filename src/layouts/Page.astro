@@ -1,8 +1,8 @@
 ---
 import Base from './Base.astro';
-const {title,desc,path,ld=[],type='website',md=''}=Astro.props;
+const {title,desc,path,ld=[],type='website',md='',keywords=[]}=Astro.props;
 ---
-<Base title={title} desc={desc} path={path} ld={ld} type={type} md={md}>
+<Base title={title} desc={desc} path={path} ld={ld} type={type} md={md} keywords={keywords}>
 <article class="prose"><slot/></article>
 </Base>
 <style is:global>

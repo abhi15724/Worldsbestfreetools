@@ -1,6 +1,7 @@
 import {live,cats} from '../data/tools.mjs';
 import {SITE} from '../lib/agents.mjs';
 import {posts} from '../lib/blog.mjs';
+import {LANGS} from '../i18n/index.mjs';
 export const GET=()=>new Response(`# Worlds Best Free Tools (WorldsBestFreeTools, worlds-best-free-tools)
 
 > Free online tools that run in your browser: calculators, PDF, image, QR, font and file converters. No signup. Every tool page also exists as Markdown at /md/<slug>.md, or send "Accept: text/markdown".
@@ -14,6 +15,9 @@ export const GET=()=>new Response(`# Worlds Best Free Tools (WorldsBestFreeTools
 ${cats.map(c=>{const l=live.filter(t=>t.cat===c.slug);return l.length?`## ${c.name}\n${l.map(t=>`- [${t.name}](${SITE}/${t.slug}/)`).join('\n')}\n`:''}).join('\n')}
 ## Guides (also available as Markdown at /blog/<slug>.md)
 ${posts.map(p=>`- [${p.title}](${SITE}/blog/${p.slug}/): ${p.description}`).join('\n')}
+
+## Translated pages
+${Object.entries(LANGS).flatMap(([k,L])=>[`- [${L.name} home](${SITE}/${k}/)`,...Object.entries(L.tools).map(([s,X])=>`- [${X.name}](${SITE}/${k}/${s}/)`)]).join('\n')}
 
 ## Optional
 - [About us](${SITE}/about-us/): what the site is and how the tools work

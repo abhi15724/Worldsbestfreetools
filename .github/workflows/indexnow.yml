@@ -1,0 +1,15 @@
+# Automatically tells Bing and other IndexNow search engines about your pages
+# every time Vercel finishes a successful PRODUCTION deploy. No setup needed.
+name: IndexNow after deploy
+on:
+  deployment_status:
+jobs:
+  ping:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/indexnow.mjs

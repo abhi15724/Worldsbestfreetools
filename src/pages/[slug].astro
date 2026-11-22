@@ -4,23 +4,34 @@ import {cats,live,seo,SITE} from '../data/tools.mjs';
 import {API_OF} from '../lib/agents.mjs';
 import {postFor} from '../lib/blog.mjs';
 import {iconFor} from '../lib/icons.mjs';
+import {CONTENT} from '../data/tool-content.mjs';
+import {LANGS,altsFor} from '../i18n/index.mjs';
 import {TOOLS,schemaOf} from '../../api/_calc.js';
 export async function getStaticPaths(){const {live}=await import('../data/tools.mjs');return live.map(x=>({params:{slug:x.slug},props:{t:x}}))}
-const {t}=Astro.props;const guide=postFor(t.slug);const s=seo(t);const cat=cats.find(c=>c.slug===t.cat);
+const {t}=Astro.props;const guide=postFor(t.slug);const C=CONTENT[t.slug];const s=seo(t);const cat=cats.find(c=>c.slug===t.cat);
 const rel=live.filter(x=>x.cat===t.cat&&x.slug!==t.slug).slice(0,6);const url=`${SITE}/${t.slug}/`;
-const ld=[{'@type':'WebApplication',name:t.name,url,applicationCategory:'UtilitiesApplication',operatingSystem:'Any',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+const ld=[{'@type':'WebApplication',name:t.name,url,description:s.desc,keywords:s.keywords.join(', '),inLanguage:'en',applicationCategory:'UtilitiesApplication',operatingSystem:'Any',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
 {'@type':'FAQPage',mainEntity:s.faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))},
 {'@type':'BreadcrumbList',itemListElement:[['Home',SITE+'/'],[cat.name,`${SITE}/category/${cat.slug}/`],[t.name,url]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))}];
 const api=API_OF[t.slug];const spec=api?JSON.stringify({name:api,description:TOOLS[api].d,inputSchema:schemaOf(api)}):'';
-const link=`<a href="${url}">${t.name} - WorldsBestFreeTools</a>`;
+const link=`<a href="${url}">${t.name} - Worlds Best Free Tools</a>`;
 ---
-<Base md={`/md/${t.slug}.md`} title={s.title} desc={s.desc} path={`/${t.slug}/`} ld={ld}>
+<Base md={`/md/${t.slug}.md`} title={s.title} desc={s.desc} path={`/${t.slug}/`} ld={ld} keywords={s.keywords} alts={altsFor(t.slug)}>
 <p class="crumbs"><a href="/">Home</a> / <a href={`/category/${cat.slug}/`}>{cat.name}</a> / {t.name}</p>
 <div class="hero"><Fragment set:html={iconFor(t,'big')}/><h1>{t.name}</h1><p class="lead">{s.desc}</p></div>
+{altsFor(t.slug).length>0&&<p style="text-align:center"><small>Also available in: {altsFor(t.slug).filter(a=>a.lang!=='en').map((a,n)=><><a href={a.url} hreflang={a.lang} lang={a.lang}>{LANGS[a.lang].name}</a>{n>0?', ':''}</>)}</small></p>}
 <section class="tool" id="tool" data-engine={t.engine} data-p={t.p} aria-label={t.name}><noscript>Please enable JavaScript to use this tool.</noscript></section>
 {guide&&<p class="lead" style="font-size:1rem">Want to understand the result? Read our guide: <a href={`/blog/${guide.slug}/`}>{guide.title}</a>.</p>}
+{C?<>
+<h2>About the {t.name.toLowerCase()}</h2>{C.a.map(p=><p>{p}</p>)}
+<h2>How to use the {t.name.toLowerCase()}</h2><ol>{C.s.map(x=><li>{x}</li>)}</ol>
+<h2>Tips and things to know</h2><ul>{C.t.map(x=><li>{x}</li>)}</ul>
+<h2>Who uses the {t.name.toLowerCase()}?</h2><p>{C.u}</p>
+{C.y&&<><h2>Example and troubleshooting</h2><p>{C.y}</p></>}
+<h2>Accuracy, limits and privacy</h2><p>{C.n}</p>{C.x&&<p>{C.x}</p>}
+</>:<>
 <h2>How to use the {t.name.toLowerCase()}</h2>
-<ol><li>Enter your values or choose your file above.</li><li>See the result instantly, right in your browser.</li><li>Copy or download the result.</li></ol>
+<ol><li>Enter your values or choose your file above.</li><li>See the result instantly, right in your browser.</li><li>Copy or download the result.</li></ol></>}
 <h2>Frequently asked questions</h2>{s.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}
 <h2>People also search for</h2><ul class="tags">{s.queries.map(q=><li>{q}</li>)}</ul>
 {rel.length>0?<section><h2>Related tools</h2><div class="grid">{rel.map(r=><a href={`/${r.slug}/`}><Fragment set:html={iconFor(r)}/><span>{r.name}</span></a>)}</div></section>:null}

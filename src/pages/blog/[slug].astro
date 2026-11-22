@@ -15,7 +15,7 @@ const ld=[
 ...(p.faq.length?[{'@type':'FAQPage',mainEntity:p.faq.map(f=>({'@type':'Question',name:f.q,acceptedAnswer:{'@type':'Answer',text:f.a}}))}]:[]),
 {'@type':'BreadcrumbList',itemListElement:[['Home',SITE+'/'],['Blog',SITE+'/blog/'],[p.title,url]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))}];
 ---
-<Page title={`${p.title} | WorldsBestFreeTools`} desc={p.description} path={`/blog/${p.slug}/`} ld={ld} type="article" md={`/blog/${p.slug}.md`}>
+<Page title={`${p.title} | WorldsBestFreeTools`} desc={p.description} path={`/blog/${p.slug}/`} ld={ld} type="article" md={`/blog/${p.slug}.md`} keywords={[...(p.keywords||[]),'worlds best free tools']}>
 <p class="crumbs"><a href="/">Home</a> / <a href="/blog/">Blog</a> / {p.title}</p>
 <h1>{p.title}</h1>
 <p class="byline">By WorldsBestFreeTools · Published {fmt(p.date)}{p.updated!==p.date&&` · Updated ${fmt(p.updated)}`} · {p.minutes} min read</p>
