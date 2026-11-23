@@ -10,7 +10,8 @@ import {TOOLS,schemaOf} from '../../api/_calc.js';
 export async function getStaticPaths(){const {live}=await import('../data/tools.mjs');return live.map(x=>({params:{slug:x.slug},props:{t:x}}))}
 const {t}=Astro.props;const guide=postFor(t.slug);const C=CONTENT[t.slug];const s=seo(t);const cat=cats.find(c=>c.slug===t.cat);
 const rel=live.filter(x=>x.cat===t.cat&&x.slug!==t.slug).slice(0,6);const url=`${SITE}/${t.slug}/`;
-const ld=[{'@type':'WebApplication',name:t.name,url,description:s.desc,keywords:s.keywords.join(', '),inLanguage:'en',applicationCategory:'UtilitiesApplication',operatingSystem:'Any',offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+const ld=[{'@type':'WebApplication',name:t.name,url,description:s.desc,keywords:s.keywords.join(', '),inLanguage:'en',applicationCategory:'UtilitiesApplication',operatingSystem:'Any',browserRequirements:'Requires JavaScript',isAccessibleForFree:true,publisher:{'@type':'Organization',name:'Worlds Best Free Tools',url:SITE+'/'},isPartOf:{'@type':'WebSite',name:'Worlds Best Free Tools',url:SITE+'/'},offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
+...(C?[{'@type':'HowTo',name:`How to use the ${t.name.toLowerCase()}`,totalTime:'PT1M',step:C.s.map((x,i)=>({'@type':'HowToStep',position:i+1,name:`Step ${i+1}`,text:x}))}]:[]),
 {'@type':'FAQPage',mainEntity:s.faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))},
 {'@type':'BreadcrumbList',itemListElement:[['Home',SITE+'/'],[cat.name,`${SITE}/category/${cat.slug}/`],[t.name,url]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))}];
 const api=API_OF[t.slug];const spec=api?JSON.stringify({name:api,description:TOOLS[api].d,inputSchema:schemaOf(api)}):'';

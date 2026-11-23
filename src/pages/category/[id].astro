@@ -1,13 +1,21 @@
 ---
 import Base from '../../layouts/Base.astro';
-import {cats,tools} from '../../data/tools.mjs';
+import {cats,tools,SITE} from '../../data/tools.mjs';
 import {iconFor} from '../../lib/icons.mjs';
 import {HUBKW} from '../../data/keywords.mjs';
+import {CATINFO} from '../../data/categories.mjs';
 export async function getStaticPaths(){const {cats}=await import('../../data/tools.mjs');return cats.map(x=>({params:{id:x.slug},props:{c:x}}))}
-const {c}=Astro.props;const ts=tools.filter(t=>t.cat===c.slug);
+const {c}=Astro.props;const ts=tools.filter(t=>t.cat===c.slug);const lv=ts.filter(t=>t.live);const info=CATINFO[c.slug]||`Free ${c.name.toLowerCase()} that run in your browser. No signup needed.`;
+const url=`${SITE}/category/${c.slug}/`;
+const ld=[{'@type':'CollectionPage',name:`${c.name}: Free Online Tools`,url,description:info,isPartOf:{'@type':'WebSite',name:'Worlds Best Free Tools',url:SITE+'/'}},
+{'@type':'ItemList',numberOfItems:lv.length,itemListElement:lv.map((t,i)=>({'@type':'ListItem',position:i+1,name:t.name,url:`${SITE}/${t.slug}/`}))},
+{'@type':'BreadcrumbList',itemListElement:[['Home',SITE+'/'],[c.name,url]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))}];
+const desc=info.length>158?info.slice(0,155).replace(/\s+\S*$/,'')+'…':info;
 ---
-<Base title={`${c.name}: Free Online Tools`} desc={`Free ${c.name.toLowerCase()} that run in your browser. No signup needed. Worlds Best Free Tools.`} path={`/category/${c.slug}/`} noindex={!ts.some(t=>t.live)} keywords={[...(HUBKW[c.slug]||[]),'worlds best free tools']}>
-<p class="crumbs"><a href="/">Home</a> / {c.name}</p><h1>{c.name}</h1>
-<div class="grid">{ts.filter(t=>t.live).map(t=>(<a href={`/${t.slug}/`}><Fragment set:html={iconFor(t)}/><span>{t.name}</span></a>))}</div>
+<Base title={`${c.name}: Free Online Tools, No Signup`} desc={desc} path={`/category/${c.slug}/`} noindex={!lv.length} keywords={[...(HUBKW[c.slug]||[]),'free online tools','best free tools','worlds best free tools']} ld={ld}>
+<p class="crumbs"><a href="/">Home</a> / {c.name}</p><div class="hero"><Fragment set:html={iconFor({slug:c.slug,cat:c.slug},'big')}/><h1>{c.name}</h1></div>
+<p class="lead">{info}</p>
+<div class="grid" style="margin-top:24px">{lv.map(t=>(<a href={`/${t.slug}/`}><Fragment set:html={iconFor(t)}/><span>{t.name}</span></a>))}</div>
 {ts.some(t=>!t.live)?<section><h2>Coming soon</h2><ul class="tags">{ts.filter(t=>!t.live).map(t=>(<li>{t.name}</li>))}</ul></section>:null}
+<section><h2>More free online tools</h2><p class="chips" style="margin-top:0">{cats.filter(x=>x.slug!==c.slug).map(x=><a href={`/category/${x.slug}/`}>{x.name}</a>)}</p></section>
 </Base>

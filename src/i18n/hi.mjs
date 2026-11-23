@@ -7,19 +7,19 @@ import c4 from './hi-compact-4.mjs';
 const hi={
 name:'हिन्दी',locale:'hi_IN',
 ui:{
- nav_calc:'कैलकुलेटर',nav_image:'इमेज',nav_pdf:'पीडीएफ',nav_qr:'क्यूआर',nav_blog:'ब्लॉग',
+ nav_calc:'कैलकुलेटर',nav_image:'इमेज',nav_pdf:'पीडीएफ',nav_qr:'क्यूआर',nav_blog:'ब्लॉग',nav_dl:'डाउनलोड',search_ph:'टूल खोजें…',nav_all:'सभी टूल्स',pop_h:'लोकप्रिय मुफ़्त टूल्स',cats_h:'श्रेणियाँ',
  about:'हमारे बारे में',contact:'संपर्क करें',privacy:'गोपनीयता नीति',terms:'नियम और शर्तें',
  footer:'आपके ब्राउज़र में चलने वाले मुफ़्त ऑनलाइन टूल्स। किसी भी टूल का लिंक अपनी साइट पर लगाने के लिए आप स्वतंत्र हैं।',
  home:'होम',about_h:'के बारे में',how_h:'कैसे इस्तेमाल करें',tips_h:'ज़रूरी बातें',faq_h:'अक्सर पूछे जाने वाले सवाल',
  english:'Read this page in English',english_note:'टूल के बटन और फ़ील्ड फ़िलहाल अंग्रेज़ी में हैं; समझाने वाला हिस्सा हिंदी में है।',
  more_en:'बाक़ी सभी टूल्स अंग्रेज़ी में उपलब्ध हैं: सभी टूल देखें',
- home_title:'Worlds Best Free Tools: मुफ़्त ऑनलाइन टूल्स हिंदी में',
+ home_title:'Worlds Best Free Tools: बेस्ट फ्री ऑनलाइन टूल्स हिंदी में, बिना साइनअप',
  home_desc:'Worlds Best Free Tools पर मुफ़्त ईएमआई, एसआईपी और जीएसटी कैलकुलेटर, इमेज कंप्रेस, पीडीएफ टूल्स और क्यूआर कोड जनरेटर। कोई साइनअप नहीं, ब्राउज़र में चलता है।',
  home_h1:'Worlds Best Free Tools: बिना साइनअप के मुफ़्त ऑनलाइन टूल्स',
  home_lead:'कैलकुलेटर, कन्वर्टर, इमेज, पीडीएफ और क्यूआर टूल्स। कोई साइनअप नहीं, कोई वॉटरमार्क नहीं। सब कुछ आपके ब्राउज़र में चलता है।',
  faq_free_q:'क्या यह टूल मुफ़्त है?',faq_free_a:'हाँ, यह पूरी तरह मुफ़्त है। कोई साइनअप, वॉटरमार्क या छिपा शुल्क नहीं है।',
  faq_priv_q:'क्या मेरी फ़ाइलें और जानकारी सुरक्षित रहती हैं?',faq_priv_a:'ज़्यादातर टूल पूरी तरह आपके ब्राउज़र में चलते हैं, इसलिए आपकी फ़ाइलें और आँकड़े हमारे सर्वर पर नहीं भेजे जाते। कुछ अपवाद गोपनीयता नीति में बताए गए हैं।',
- home_kw:['worlds best free tools','मुफ़्त ऑनलाइन टूल्स','free online tools in hindi','emi calculator in hindi','pdf tools hindi']
+ home_kw:['worlds best free tools','मुफ़्त ऑनलाइन टूल्स','free online tools in hindi','emi calculator in hindi','pdf tools hindi','free tools','best free tools','free online tools','best tools in hindi','फ्री टूल्स']
 },
 tools:{
 'emi-calculator':{name:'ईएमआई कैलकुलेटर',title:'EMI Calculator in Hindi: ईएमआई कैलकुलेटर, लोन ईएमआई निकालें',

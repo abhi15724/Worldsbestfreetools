@@ -43,3 +43,15 @@ Add a language in ~3 steps:
 3. Add the row to `src/i18n/locales.mjs` and import the module in `src/i18n/index.mjs` (add to `MOD`). `npm run build`, deploy, then `npm run indexnow`.
 India-only tools (tax, PPF, UPI, Kruti Dev...) are intentionally left out of non-Indian languages; each language home links to the English site for them.
 Finance tools default their currency by page language (pt-BR=BRL, id=IDR, ar=SAR); users can still pick any currency.
+
+## Micro tools (155 small tools, data-driven)
+Each micro tool is ONE definition in `src/data/micro-*.mjs` (`D(category, slug, name, description, fields, runFunction)`).
+Adding a tool = adding one line there. Its page, sitemap entry, Markdown version, llms.txt line, search entry, keywords and page text are generated automatically.
+Field spec: `'id|Label|default|type|extra'` (types: n number, t text, a textarea, s select (options separated by ;), d date, c color, r range, f file, m multiple files). Use the broken bar character (U+00A6) when a label or default needs a real pipe.
+Test all pure tools in Node: see the loop used in development (run each `r(values)` with defaults); the browser engine is `src/scripts/micro.js`.
+
+## Search
+A search box is in the header of every page (all languages) and on translated home pages. It loads a small per-language index (`/search-index/<lang>.json`) only when the box is focused. Translated tools show their translated names; others show English names and open the English page.
+
+## Deploy and IndexNow
+Push to GitHub, Vercel deploys. `.github/workflows/indexnow.yml` pings Bing/IndexNow automatically after each successful Production deploy. You can also run `npm run indexnow` by hand after a deploy. Google does not use IndexNow: submit `/sitemap-index.xml` once in Google Search Console.

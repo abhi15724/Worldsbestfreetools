@@ -16,14 +16,18 @@ heart:'M12 20s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z',
 globe:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z M3 12h18 M12 3c3 3 3 15 0 18 M12 3c-3 3-3 15 0 18',
 spark:'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z M19 16l.7 1.8L21.5 18.5l-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z',
 cube:'M12 3l8 4.5v9L12 21l-8-4.5v-9z M4 7.5l8 4.5 8-4.5 M12 12v9',
+book:'M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z M5 17a3 3 0 0 1 3-3h10',
+cart:'M4 5h2l2 10h9l2-7H7 M10 19h.01 M16 19h.01',
+home:'M4 11l8-7 8 7 M6 10v10h12V10 M10 20v-6h4v6',
+download:'M12 4v11 M7.5 11l4.5 4.5 4.5-4.5 M5 19h14',
 rupee:'M7 5h10 M7 9h10 M7 5c5 0 7 2 7 4s-2 4-7 4l7 6'
 };
-const COL={pdf:'#d9480f',image:'#7048e8',finance:'#1a7f5a',units:'#0b7285',text:'#1864ab',fonts:'#c2255c',qr:'#15171c',india:'#e67700',threed:'#5f3dc4',dev:'#495057',seo:'#087f5b',social:'#c2255c',design:'#9c36b5',health:'#c8301a',datetime:'#e8590c',media:'#ae3ec9',security:'#2b8a3e',fun:'#f08c00'};
-const CATG={pdf:'doc',image:'image',finance:'coin',units:'ruler',text:'type',fonts:'type',qr:'qr',india:'rupee',threed:'cube',dev:'code',seo:'globe',social:'globe',design:'palette',health:'heart',datetime:'calendar',media:'play',security:'lock',fun:'spark'};
-const RULES=[[/qr/,'qr'],[/pdf/,'doc'],[/password|uuid|hash|encrypt|lock|secure/,'lock'],[/color|colour|gradient|palette/,'palette'],[/video|mp3|audio|gif/,'play'],[/image|png|jpg|jpeg|webp|photo|resize|crop|picture|background|ocr|svg|passport|favicon|heic|ico\b|flip|blur|watermark|meme|exif/,'image'],[/emi|loan|sip|swp|cagr|compound|ppf|nps|fd-|lumpsum|gratuity|hra|salary|tax|gst|currency|usd|inr|interest|prepay|mutual|money|invest/,'coin'],[/percent|calculator/,'calc'],[/age|date|time|clock|countdown|timer|stopwatch|calendar|day|week/,'calendar'],[/bmi|calorie|health|water|pregnan/,'heart'],[/json|regex|base64|html|css|js|minif|url|encode|decode|meta|robots|sitemap|slug/,'code'],[/font|text|word|case|lorem|line|character|counter|emoji|symbol|bio|tag|caption|hashtag|name/,'type']];
+const COL={pdf:'#d9480f',image:'#7048e8',finance:'#1a7f5a',units:'#0b7285',text:'#1864ab',fonts:'#c2255c',qr:'#15171c',india:'#e67700',threed:'#5f3dc4',dev:'#495057',seo:'#087f5b',social:'#c2255c',design:'#9c36b5',health:'#c8301a',datetime:'#e8590c',media:'#ae3ec9',security:'#2b8a3e',fun:'#f08c00',download:'#0b7a4b',student:'#1971c2',business:'#2f9e44',everyday:'#e8590c'};
+const CATG={pdf:'doc',image:'image',finance:'coin',units:'ruler',text:'type',fonts:'type',qr:'qr',india:'rupee',threed:'cube',dev:'code',seo:'globe',social:'globe',design:'palette',health:'heart',datetime:'calendar',media:'play',security:'lock',fun:'spark',download:'download',student:'book',business:'cart',everyday:'home'};
+const RULES=[[/download/,'download'],[/qr/,'qr'],[/pdf/,'doc'],[/password|uuid|hash|encrypt|lock|secure/,'lock'],[/color|colour|gradient|palette/,'palette'],[/video|mp3|audio|gif/,'play'],[/image|png|jpg|jpeg|webp|photo|resize|crop|picture|background|ocr|svg|passport|favicon|heic|ico\b|flip|blur|watermark|meme|exif/,'image'],[/emi|loan|sip|swp|cagr|compound|ppf|nps|fd-|lumpsum|gratuity|hra|salary|tax|gst|currency|usd|inr|interest|prepay|mutual|money|invest/,'coin'],[/percent|calculator/,'calc'],[/age|date|time|clock|countdown|timer|stopwatch|calendar|day|week/,'calendar'],[/bmi|calorie|health|water|pregnan/,'heart'],[/json|regex|base64|html|css|js|minif|url|encode|decode|meta|robots|sitemap|slug/,'code'],[/font|text|word|case|lorem|line|character|counter|emoji|symbol|bio|tag|caption|hashtag|name/,'type']];
 export const iconFor=(t,size='')=>{
   const slug=t.slug||'',cat=t.cat||'';
-  const g=(RULES.find(([r])=>r.test(slug))||[0,CATG[cat]||'calc'])[1];
+  const g=t.micro?(CATG[cat]||'calc'):(RULES.find(([r])=>r.test(slug))||[0,CATG[cat]||'calc'])[1];
   const c=COL[cat]||'#c8301a';
   return `<span class="ico${size?' '+size:''}" style="--c:${c}" aria-hidden="true"><svg viewBox="0 0 24 24" width="${size==='big'?34:24}" height="${size==='big'?34:24}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${G[g]}"/></svg></span>`;
 };

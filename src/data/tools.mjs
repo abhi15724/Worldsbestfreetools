@@ -1,8 +1,13 @@
 import {KW} from './keywords.mjs';
+import {MICRO} from './micro-defs.mjs';
 // cat|slug|Name|engine|param  -> engine set = LIVE (gets a page + sitemap entry). Empty engine = planned (no page yet, avoids thin content).
 const C=`pdf|PDF Tools
 image|Image Tools
+download|Video & File Download Tools
 finance|Finance & Loan Calculators
+business|Business & Ecommerce
+everyday|Everyday & Home Calculators
+student|Student & Education
 units|Units, Ruler & Measurement
 text|Text Tools
 fonts|Font & Stylish Text
@@ -117,16 +122,19 @@ design|color-picker|Color Picker|color
 design|gradient-generator|CSS Gradient Generator|grad
 datetime|age-calculator|Age Calculator|age
 datetime|date-difference-calculator|Date Difference Calculator|datediff
+download|video-link-downloader|Video Link Downloader|dlvideo|video
+download|file-downloader-from-url|File Downloader from URL|dlvideo|file
 media|video-compressor|Video Compressor|vcompress
 media|video-to-mp3|Video to MP3 Converter|vmp3
 security|password-generator|Password Generator|pass
 fun|random-name-generator|Random Name Generator|names`;
 export const cats=C.split('\n').map(l=>{const[slug,name]=l.split('|');return{slug,name}});
-export const tools=T.split('\n').map(l=>{const[cat,slug,name,engine='',p='']=l.split('|');return{cat,slug,name,engine,p,live:!!engine}});
+export const tools=[...T.split('\n').map(l=>{const[cat,slug,name,engine='',p='']=l.split('|');return{cat,slug,name,engine,p,live:!!engine}}),...MICRO.map(m=>({cat:m.c,slug:m.s,name:m.n,engine:'micro',p:m.s,live:true,micro:true,blurb:m.d}))];
+for(const t of tools)if(t.micro&&!KW[t.slug]){const l=t.name.toLowerCase();KW[t.slug]={a:[l,l+' online','free '+l],x:[l+' online free',l+' without signup','how to use a '+l,'best '+l,l+' on mobile']}}
 export const live=tools.filter(t=>t.live);
 export const SITE='https://worldsbestfreetools.online';
 export function seo(t){const n=t.name,l=n.toLowerCase();const k=KW[t.slug]||{a:[l],x:[]};
-const al=k.a.filter(a=>a!==l);let desc;for(let i=al.length;i>=0;i--){desc=`Free ${l} online${i?': '+al.slice(0,i).join(', '):''}. No signup, fast, and your data stays in your browser. Worlds Best Free Tools.`;if(desc.length<=160)break}
+const al=k.a.filter(a=>a!==l);let desc;if(t.blurb)desc=t.blurb.length<=160?t.blurb:t.blurb.slice(0,157).replace(/\s+\S*$/,'')+'…';else for(let i=al.length;i>=0;i--){desc=`Free ${l} online${i?': '+al.slice(0,i).join(', '):''}. No signup, fast, and your data stays in your browser. Worlds Best Free Tools.`;if(desc.length<=160)break}
 return{
 title:`${n} – Free Online, No Signup`,
 desc,
