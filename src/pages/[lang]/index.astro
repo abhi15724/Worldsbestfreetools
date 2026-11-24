@@ -1,7 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import {LANGS,homeAlts} from '../../i18n/index.mjs';
-import {live,SITE} from '../../data/tools.mjs';
+import {live,cats,SITE} from '../../data/tools.mjs';
+import {CATNAMES} from '../../i18n/cats.mjs';
 import {iconFor} from '../../lib/icons.mjs';
 export function getStaticPaths(){return Object.keys(LANGS).map(lang=>({params:{lang},props:{lang}}))}
 const {lang}=Astro.props;const L=LANGS[lang],U=L.ui;
@@ -12,6 +13,7 @@ const ld=[{'@type':'WebSite',name:'Worlds Best Free Tools',url:`${SITE}/${lang}/
 <Base lang={lang} alts={homeAlts()} title={U.home_title} desc={U.home_desc} path={`/${lang}/`} keywords={U.home_kw} ld={ld}>
 <div class="hero"><h1>{U.home_h1}</h1><p class="lead">{U.home_lead}</p></div>
 <div style="position:relative;max-width:560px;margin:22px auto"><input class="search" data-search type="search" placeholder={U.search_ph||'Search tools…'} aria-label={U.search_ph||'Search tools…'} autocomplete="off" style="margin:0"></div>
+<div class="chips" style="margin-top:18px">{cats.filter(c=>live.some(t=>t.cat===c.slug&&L.tools[t.slug])).map(c=><a href={`/${lang}/category/${c.path}/`}>{CATNAMES[lang]?.[c.slug]||c.name}</a>)}</div>
 <div class="grid" style="margin-top:28px">{items.map(i=><a href={`/${lang}/${i.slug}/`}><Fragment set:html={iconFor(i.t)}/><span>{i.X.name}</span></a>)}</div>
 <p style="margin-top:32px"><a href="/" hreflang="en" lang="en">{U.more_en}</a></p>
 <p><small>{homeAlts().filter(a=>a.code!==lang).map((a,n)=><>{n>0?' · ':''}<a href={a.url} hreflang={a.lang} lang={a.lang}>{a.name}</a></>)}</small></p>

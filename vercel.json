@@ -22,7 +22,7 @@
     },
     {
      "key": "Permissions-Policy",
-     "value": "camera=(), microphone=(), geolocation=()"
+     "value": "camera=(), microphone=(), geolocation=(self)"
     }
    ]
   },
@@ -74,6 +74,228 @@
      "value": "public, max-age=604800, stale-while-revalidate=86400"
     }
    ]
+  }
+ ],
+ "redirects": [
+  {
+   "source": "/category/pdf/",
+   "destination": "/category/pdf-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/image/",
+   "destination": "/category/image-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/download/",
+   "destination": "/category/video-download-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/finance/",
+   "destination": "/category/finance-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/business/",
+   "destination": "/category/business-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/everyday/",
+   "destination": "/category/everyday-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/student/",
+   "destination": "/category/student-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/units/",
+   "destination": "/category/measurement-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/text/",
+   "destination": "/category/text-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/fonts/",
+   "destination": "/category/font-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/qr/",
+   "destination": "/category/qr-code-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/india/",
+   "destination": "/category/indian-language-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/threed/",
+   "destination": "/category/3d-image-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/dev/",
+   "destination": "/category/developer-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/seo/",
+   "destination": "/category/seo-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/social/",
+   "destination": "/category/social-media-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/design/",
+   "destination": "/category/design-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/health/",
+   "destination": "/category/health-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/datetime/",
+   "destination": "/category/date-time-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/media/",
+   "destination": "/category/video-audio-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/security/",
+   "destination": "/category/security-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/fun/",
+   "destination": "/category/game-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/pdf",
+   "destination": "/category/pdf-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/image",
+   "destination": "/category/image-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/download",
+   "destination": "/category/video-download-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/finance",
+   "destination": "/category/finance-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/business",
+   "destination": "/category/business-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/everyday",
+   "destination": "/category/everyday-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/student",
+   "destination": "/category/student-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/units",
+   "destination": "/category/measurement-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/text",
+   "destination": "/category/text-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/fonts",
+   "destination": "/category/font-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/qr",
+   "destination": "/category/qr-code-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/india",
+   "destination": "/category/indian-language-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/threed",
+   "destination": "/category/3d-image-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/dev",
+   "destination": "/category/developer-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/seo",
+   "destination": "/category/seo-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/social",
+   "destination": "/category/social-media-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/design",
+   "destination": "/category/design-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/health",
+   "destination": "/category/health-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/datetime",
+   "destination": "/category/date-time-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/media",
+   "destination": "/category/video-audio-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/security",
+   "destination": "/category/security-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/category/fun",
+   "destination": "/category/game-tools/",
+   "permanent": true
   }
  ]
 }

@@ -4,7 +4,7 @@ import c1 from './pt-br-compact-1.mjs';
 import c2 from './pt-br-compact-2.mjs';
 import c3 from './pt-br-compact-3.mjs';
 const ui={
- nav_calc:'Calculadoras',nav_image:'Imagem',nav_pdf:'PDF',nav_qr:'QR',nav_blog:'Blog',nav_dl:'Downloads',search_ph:'Buscar ferramenta…',nav_all:'Todas as ferramentas',pop_h:'Ferramentas grátis populares',cats_h:'Categorias',
+ nav_calc:'Calculadoras',nav_image:'Imagem',nav_pdf:'PDF',nav_qr:'QR',nav_blog:'Blog',nav_dl:'Downloads',cat_title:'{n}: ferramentas grátis online',cat_desc:'{n}: ferramentas grátis online que funcionam no seu navegador. Sem cadastro e sem marca d\u2019água.',search_ph:'Buscar ferramenta…',nav_all:'Todas as ferramentas',pop_h:'Ferramentas grátis populares',cats_h:'Categorias',
  about:'Sobre nós',contact:'Contato',privacy:'Política de privacidade',terms:'Termos e condições',
  footer:'Ferramentas online gratuitas que funcionam no seu navegador. Você pode colocar o link de qualquer ferramenta no seu site.',
  home:'Início',about_h:'',about_fmt:'Sobre: {n}',how_h:'Como usar',tips_h:'Dicas',faq_h:'Perguntas frequentes',

@@ -4,8 +4,13 @@ import es from './es.mjs';
 import ptbr from './pt-br.mjs';
 import id from './id.mjs';
 import ar from './ar.mjs';
+import de from './de.mjs';
+import ja from './ja.mjs';
+import zhcn from './zh-cn.mjs';
+import zhtw from './zh-tw.mjs';
+import ru from './ru.mjs';
 // Every language registered in locales.mjs gets /<code>/ home + tool pages, hreflang links, sitemap entries and llms.txt entries automatically.
-const MOD={hi,es,'pt-br':ptbr,id,ar};
+const MOD={hi,es,'pt-br':ptbr,id,ar,de,ja,'zh-cn':zhcn,'zh-tw':zhtw,ru};
 export const LANGS=Object.fromEntries(LOCALES.map(m=>[m.code,{...m,...MOD[m.code]}]));
 const EN={lang:'en',code:'en',gt:'en',name:'English'};
 export const altsFor=slug=>{const a=[{...EN,url:`/${slug}/`}];for(const [k,L] of Object.entries(LANGS))if(L.tools[slug])a.push({lang:L.hreflang,code:k,gt:L.gt,name:L.name,url:`/${k}/${slug}/`});return a.length>1?a:[]};

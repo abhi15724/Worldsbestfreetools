@@ -4,7 +4,7 @@ import c1 from './ar-compact-1.mjs';
 import c2 from './ar-compact-2.mjs';
 import c3 from './ar-compact-3.mjs';
 const ui={
- nav_calc:'الحاسبات',nav_image:'الصور',nav_pdf:'PDF',nav_qr:'QR',nav_blog:'المدونة',nav_dl:'التنزيل',search_ph:'ابحث عن أداة…',nav_all:'كل الأدوات',pop_h:'أدوات مجانية شائعة',cats_h:'الأقسام',
+ nav_calc:'الحاسبات',nav_image:'الصور',nav_pdf:'PDF',nav_qr:'QR',nav_blog:'المدونة',nav_dl:'التنزيل',cat_title:'{n}: أدوات مجانية أونلاين',cat_desc:'{n}: أدوات مجانية أونلاين تعمل داخل متصفحك. بدون تسجيل وبدون علامة مائية.',search_ph:'ابحث عن أداة…',nav_all:'كل الأدوات',pop_h:'أدوات مجانية شائعة',cats_h:'الأقسام',
  about:'من نحن',contact:'اتصل بنا',privacy:'سياسة الخصوصية',terms:'الشروط والأحكام',
  footer:'أدوات مجانية عبر الإنترنت تعمل داخل متصفحك. يمكنك وضع رابط أي أداة في موقعك بحرية.',
  home:'الرئيسية',about_h:'',about_fmt:'حول: {n}',how_h:'طريقة الاستخدام',tips_h:'نصائح',faq_h:'الأسئلة الشائعة',

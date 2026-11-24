@@ -19,7 +19,7 @@ const faq=[
 const ld=[
 {'@type':'WebSite',name:'Worlds Best Free Tools',alternateName:['worlds-best-free-tools','WorldsBestFreeTools','worlds best free tools','World\'s Best Free Tools','best free tools','free online tools'],url:SITE+'/',inLanguage:'en',potentialAction:{'@type':'SearchAction',target:{'@type':'EntryPoint',urlTemplate:SITE+'/?q={search_term_string}'},'query-input':'required name=search_term_string'}},
 {'@type':'Organization',name:'Worlds Best Free Tools',alternateName:['worlds-best-free-tools','WorldsBestFreeTools'],url:SITE+'/',logo:{'@type':'ImageObject',url:SITE+'/icon-512.png',width:512,height:512}},
-{'@type':'CollectionPage',name:'Best free online tools',url:SITE+'/',description:`${N} free online tools: calculators, PDF, image, QR, video link and file download tools.`,hasPart:groups.map(g=>({'@type':'CollectionPage',name:g.c.name,url:`${SITE}/category/${g.c.slug}/`}))},
+{'@type':'CollectionPage',name:'Best free online tools',url:SITE+'/',description:`${N} free online tools: calculators, PDF, image, QR, video link and file download tools.`,hasPart:groups.map(g=>({'@type':'CollectionPage',name:g.c.name,url:`${SITE}/category/${g.c.path}/`}))},
 {'@type':'ItemList',name:'Free online tools',numberOfItems:N,itemListElement:live.map((t,i)=>({'@type':'ListItem',position:i+1,name:t.name,url:`${SITE}/${t.slug}/`}))},
 {'@type':'FAQPage',mainEntity:faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))}];
 ---
@@ -28,10 +28,10 @@ const ld=[
 <p class="lead">Worlds Best Free Tools is a collection of {N} free tools: calculators, converters, PDF, image, QR, video link and file download tools. No signup, no watermark. Everything runs in your browser.</p>
 <ul class="trust"><li>100% free</li><li>No signup</li><li>Private: runs in your browser</li><li>Works on phone and desktop</li></ul></div>
 <input class="search" id="q" type="search" placeholder="Search free tools, e.g. EMI calculator, merge PDF" aria-label="Search tools" autocomplete="off">
-<div class="chips" id="chips">{groups.slice(0,10).map(g=><a href={`/category/${g.c.slug}/`}>{g.c.name}</a>)}</div>
+<div class="chips" id="chips">{groups.slice(0,10).map(g=><a href={`/category/${g.c.path}/`}>{g.c.name}</a>)}</div>
 <section id="pop"><h2>Popular free tools</h2>
 <div class="grid">{popular.map(t=><a href={`/${t.slug}/`}><Fragment set:html={iconFor(t)}/><span>{t.name}</span></a>)}</div></section>
-<div id="list">{groups.map(g=><section class="cat"><h2><a href={`/category/${g.c.slug}/`}>{g.c.name}</a><a class="more" href={`/category/${g.c.slug}/`}>{g.items.length} tools &rsaquo;</a></h2>
+<div id="list">{groups.map(g=><section class="cat"><h2><a href={`/category/${g.c.path}/`}>{g.c.name}</a><a class="more" href={`/category/${g.c.path}/`}>{g.items.length} tools &rsaquo;</a></h2>
 <div class="grid">{g.items.map(t=><a href={`/${t.slug}/`}><Fragment set:html={iconFor(t)}/><span>{t.name}</span></a>)}</div></section>)}</div>
 <p id="none" hidden>No tool found. Try another word, for example "pdf", "loan" or "qr".</p>
 <section><h2>Why use these free online tools?</h2>

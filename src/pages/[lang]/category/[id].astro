@@ -1,0 +1,22 @@
+---
+import Base from '../../../layouts/Base.astro';
+import {LANGS} from '../../../i18n/index.mjs';
+import {CATNAMES} from '../../../i18n/cats.mjs';
+import {cats,live,SITE} from '../../../data/tools.mjs';
+import {iconFor} from '../../../lib/icons.mjs';
+// One translated category page per language and category that has at least one translated tool (no empty pages).
+export function getStaticPaths(){const out:any[]=[];for(const lang of Object.keys(LANGS)){for(const c of cats){const items=live.filter(t=>t.cat===c.slug&&(LANGS as any)[lang].tools[t.slug]);if(items.length)out.push({params:{lang,id:c.path},props:{lang,c}})}}return out}
+const {lang,c}=Astro.props;const L=LANGS[lang],U=L.ui,name=CATNAMES[lang]?.[c.slug]||c.name;
+const items=live.filter(t=>t.cat===c.slug&&L.tools[t.slug]);
+const fill=(s:string)=>(s||'{n}').replace(/\{n\}/g,name);
+const url=`${SITE}/${lang}/category/${c.path}/`;
+const alts=[{lang:'en',code:'en',gt:'en',name:'English',url:`/category/${c.path}/`},...Object.entries(LANGS).filter(([k,X]:any)=>live.some(t=>t.cat===c.slug&&X.tools[t.slug])).map(([k,X]:any)=>({lang:X.hreflang,code:k,gt:X.gt,name:X.name,url:`/${k}/category/${c.path}/`}))];
+const ld=[{'@type':'CollectionPage',name,url,inLanguage:L.hreflang,description:fill(U.cat_desc)},{'@type':'ItemList',numberOfItems:items.length,itemListElement:items.map((t,i)=>({'@type':'ListItem',position:i+1,name:L.tools[t.slug].name,url:`${SITE}/${lang}/${t.slug}/`}))},{'@type':'BreadcrumbList',itemListElement:[[U.home,`${SITE}/${lang}/`],[name,url]].map(([n,item],i)=>({'@type':'ListItem',position:i+1,name:n,item}))}];
+---
+<Base lang={lang} alts={alts} title={fill(U.cat_title)} desc={fill(U.cat_desc)} path={`/${lang}/category/${c.path}/`} keywords={[name,'free online tools']} ld={ld}>
+<p class="crumbs"><a href={`/${lang}/`}>{U.home}</a> / {name}</p>
+<div class="hero"><Fragment set:html={iconFor({slug:c.slug,cat:c.slug},'big')}/><h1>{name}</h1></div>
+<p class="lead">{fill(U.cat_desc)}</p>
+<div class="grid" style="margin-top:24px">{items.map(t=><a href={`/${lang}/${t.slug}/`}><Fragment set:html={iconFor(t)}/><span>{L.tools[t.slug].name}</span></a>)}</div>
+<p style="margin-top:28px"><a href={`/category/${c.path}/`} hreflang="en" lang="en">{U.more_en}</a></p>
+</Base>

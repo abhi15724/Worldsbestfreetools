@@ -13,12 +13,12 @@ const rel=live.filter(x=>x.cat===t.cat&&x.slug!==t.slug).slice(0,6);const url=`$
 const ld=[{'@type':'WebApplication',name:t.name,url,description:s.desc,keywords:s.keywords.join(', '),inLanguage:'en',applicationCategory:'UtilitiesApplication',operatingSystem:'Any',browserRequirements:'Requires JavaScript',isAccessibleForFree:true,publisher:{'@type':'Organization',name:'Worlds Best Free Tools',url:SITE+'/'},isPartOf:{'@type':'WebSite',name:'Worlds Best Free Tools',url:SITE+'/'},offers:{'@type':'Offer',price:'0',priceCurrency:'USD'}},
 ...(C?[{'@type':'HowTo',name:`How to use the ${t.name.toLowerCase()}`,totalTime:'PT1M',step:C.s.map((x,i)=>({'@type':'HowToStep',position:i+1,name:`Step ${i+1}`,text:x}))}]:[]),
 {'@type':'FAQPage',mainEntity:s.faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))},
-{'@type':'BreadcrumbList',itemListElement:[['Home',SITE+'/'],[cat.name,`${SITE}/category/${cat.slug}/`],[t.name,url]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))}];
+{'@type':'BreadcrumbList',itemListElement:[['Home',SITE+'/'],[cat.name,`${SITE}/category/${cat.path}/`],[t.name,url]].map(([name,item],i)=>({'@type':'ListItem',position:i+1,name,item}))}];
 const api=API_OF[t.slug];const spec=api?JSON.stringify({name:api,description:TOOLS[api].d,inputSchema:schemaOf(api)}):'';
 const link=`<a href="${url}">${t.name} - Worlds Best Free Tools</a>`;
 ---
 <Base md={`/md/${t.slug}.md`} title={s.title} desc={s.desc} path={`/${t.slug}/`} ld={ld} keywords={s.keywords} alts={altsFor(t.slug)}>
-<p class="crumbs"><a href="/">Home</a> / <a href={`/category/${cat.slug}/`}>{cat.name}</a> / {t.name}</p>
+<p class="crumbs"><a href="/">Home</a> / <a href={`/category/${cat.path}/`}>{cat.name}</a> / {t.name}</p>
 <div class="hero"><Fragment set:html={iconFor(t,'big')}/><h1>{t.name}</h1><p class="lead">{s.desc}</p></div>
 {altsFor(t.slug).length>0&&<p style="text-align:center"><small>Also available in: {altsFor(t.slug).filter(a=>a.lang!=='en').map((a,n)=><>{n>0?' · ':''}<a href={a.url} hreflang={a.lang} lang={a.lang}>{a.name}</a></>)}</small></p>}
 <section class="tool" id="tool" data-engine={t.engine} data-p={t.p} aria-label={t.name}><noscript>Please enable JavaScript to use this tool.</noscript><p class="tool-loading">Loading tool…</p></section>

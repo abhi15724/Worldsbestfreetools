@@ -23,7 +23,7 @@ const ld=[{'@type':'AboutPage',name:'About WorldsBestFreeTools',url:SITE+'/about
 
 <h2>What you will find here</h2>
 <table><thead><tr><th>Category</th><th>Live tools</th></tr></thead><tbody>
-{by.map(c=><tr><td><a href={`/category/${c.slug}/`}>{c.name}</a></td><td>{c.n}</td></tr>)}
+{by.map(c=><tr><td><a href={`/category/${c.path}/`}>{c.name}</a></td><td>{c.n}</td></tr>)}
 </tbody></table>
 <p>We add new tools regularly, and we only publish a tool page once the tool actually works. Planned tools are not listed as finished pages, so you will not land on empty "coming soon" content.</p>
 

@@ -55,3 +55,16 @@ A search box is in the header of every page (all languages) and on translated ho
 
 ## Deploy and IndexNow
 Push to GitHub, Vercel deploys. `.github/workflows/indexnow.yml` pings Bing/IndexNow automatically after each successful Production deploy. You can also run `npm run indexnow` by hand after a deploy. Google does not use IndexNow: submit `/sitemap-index.xml` once in Google Search Console.
+
+## Languages now live (11 incl. English)
+Hindi /hi/, Spanish /es/, Portuguese-Brazil /pt-br/, Indonesian /id/, Arabic /ar/ (RTL), German /de/, Japanese /ja/, Chinese Simplified /zh-cn/, Chinese Traditional-Taiwan /zh-tw/, Russian /ru/.
+The 5 newest languages have 27 translated high-demand tools each (src/i18n/<code>.mjs). Every other tool is reachable from the search box (English page) and the Google Translate menu.
+To translate more tools: add rows to the `R` object in a language file (format: slug:[name, description, intro, [3 steps]]). New category names live in src/i18n/cats.mjs.
+Each language also gets translated category pages: /de/category/finance-tools/ etc. (only for categories that have at least one translated tool).
+
+## Category URLs
+Categories use keyword URLs: /category/business-tools/, /category/pdf-tools/, /category/video-download-tools/ ... (see CATPATH in src/data/tools.mjs).
+Old URLs such as /category/business/ are permanently redirected (301) in vercel.json.
+
+## Games and speed tools
+Reaction Time Test, Wordle (daily + random word) and GPS Car Speedometer live in src/scripts/games.js. The speedometer needs the Permissions-Policy header geolocation=(self) which is set in vercel.json.

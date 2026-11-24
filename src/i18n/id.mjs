@@ -4,7 +4,7 @@ import c1 from './id-compact-1.mjs';
 import c2 from './id-compact-2.mjs';
 import c3 from './id-compact-3.mjs';
 const ui={
- nav_calc:'Kalkulator',nav_image:'Gambar',nav_pdf:'PDF',nav_qr:'QR',nav_blog:'Blog',nav_dl:'Unduh',search_ph:'Cari alat…',nav_all:'Semua alat',pop_h:'Alat gratis populer',cats_h:'Kategori',
+ nav_calc:'Kalkulator',nav_image:'Gambar',nav_pdf:'PDF',nav_qr:'QR',nav_blog:'Blog',nav_dl:'Unduh',cat_title:'{n}: alat online gratis',cat_desc:'{n}: alat online gratis yang berjalan di browser Anda. Tanpa daftar dan tanpa watermark.',search_ph:'Cari alat…',nav_all:'Semua alat',pop_h:'Alat gratis populer',cats_h:'Kategori',
  about:'Tentang kami',contact:'Kontak',privacy:'Kebijakan privasi',terms:'Syarat dan ketentuan',
  footer:'Alat online gratis yang berjalan di browser Anda. Anda bebas menautkan alat mana pun dari situs Anda.',
  home:'Beranda',about_h:'',about_fmt:'Tentang: {n}',how_h:'Cara menggunakan',tips_h:'Tips',faq_h:'Pertanyaan yang sering diajukan',

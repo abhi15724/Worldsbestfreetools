@@ -9,7 +9,7 @@ const ld=[{'@type':'CollectionPage',name:'All free online tools',url:SITE+'/all-
 <Base title="All Free Online Tools: Complete List of Free Tools" desc={`Complete list of all ${live.length} free online tools on Worlds Best Free Tools: calculators, PDF, image, QR, video link and file tools. No signup.`} path="/all-tools/" keywords={['all free online tools','free tools list','best free tools','worlds best free tools']} ld={ld}>
 <p class="crumbs"><a href="/">Home</a> / All tools</p><h1>All free online tools</h1>
 <p class="lead">Every free tool on Worlds Best Free Tools, grouped by category. No signup, no watermark, runs in your browser.</p>
-{groups.map(g=><section class="cat"><h2><a href={`/category/${g.c.slug}/`}>{g.c.name}</a></h2><ul class="alist">{g.items.map(t=><li><a href={`/${t.slug}/`}>{t.name}</a></li>)}</ul></section>)}
+{groups.map(g=><section class="cat"><h2><a href={`/category/${g.c.path}/`}>{g.c.name}</a></h2><ul class="alist">{g.items.map(t=><li><a href={`/${t.slug}/`}>{t.name}</a></li>)}</ul></section>)}
 <section class="cat"><h2>Guides and articles</h2><ul class="alist">{posts.map(p=><li><a href={`/blog/${p.slug}/`}>{p.title}</a></li>)}</ul></section>
 <section class="cat"><h2>Translated versions</h2><ul class="alist">{homeAlts().filter(a=>a.code!=='en').map(a=><li><a href={a.url} hreflang={a.lang} lang={a.lang}>{a.name}</a></li>)}</ul></section>
 </Base>

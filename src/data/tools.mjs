@@ -22,7 +22,7 @@ health|Health & Everyday
 datetime|Date & Time
 media|Video & Audio
 security|Security & Network
-fun|Generators & Fun`;
+fun|Games, Generators & Fun`;
 const T=`finance|emi-calculator|EMI Calculator|emi
 finance|home-loan-emi-calculator|Home Loan EMI Calculator|emi|8.5,20
 finance|car-loan-emi-calculator|Car Loan EMI Calculator|emi|9,5
@@ -124,11 +124,15 @@ datetime|age-calculator|Age Calculator|age
 datetime|date-difference-calculator|Date Difference Calculator|datediff
 download|video-link-downloader|Video Link Downloader|dlvideo|video
 download|file-downloader-from-url|File Downloader from URL|dlvideo|file
+fun|reaction-time-test|Reaction Time Test|games|reaction
+fun|wordle-game|Wordle Game (Daily Word Puzzle)|games|wordle
+fun|gps-speedometer|GPS Car Speedometer|games|speed
 media|video-compressor|Video Compressor|vcompress
 media|video-to-mp3|Video to MP3 Converter|vmp3
 security|password-generator|Password Generator|pass
 fun|random-name-generator|Random Name Generator|names`;
-export const cats=C.split('\n').map(l=>{const[slug,name]=l.split('|');return{slug,name}});
+export const CATPATH={"pdf": "pdf-tools", "image": "image-tools", "download": "video-download-tools", "finance": "finance-tools", "business": "business-tools", "everyday": "everyday-tools", "student": "student-tools", "units": "measurement-tools", "text": "text-tools", "fonts": "font-tools", "qr": "qr-code-tools", "india": "indian-language-tools", "threed": "3d-image-tools", "dev": "developer-tools", "seo": "seo-tools", "social": "social-media-tools", "design": "design-tools", "health": "health-tools", "datetime": "date-time-tools", "media": "video-audio-tools", "security": "security-tools", "fun": "game-tools"};
+export const cats=C.split('\n').map(l=>{const[slug,name]=l.split('|');return{slug,name,path:CATPATH[slug]||slug+'-tools'}});
 export const tools=[...T.split('\n').map(l=>{const[cat,slug,name,engine='',p='']=l.split('|');return{cat,slug,name,engine,p,live:!!engine}}),...MICRO.map(m=>({cat:m.c,slug:m.s,name:m.n,engine:'micro',p:m.s,live:true,micro:true,blurb:m.d}))];
 for(const t of tools)if(t.micro&&!KW[t.slug]){const l=t.name.toLowerCase();KW[t.slug]={a:[l,l+' online','free '+l],x:[l+' online free',l+' without signup','how to use a '+l,'best '+l,l+' on mobile']}}
 export const live=tools.filter(t=>t.live);
