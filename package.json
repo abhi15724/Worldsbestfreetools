@@ -1,1 +1,31 @@
-{"name":"worldsbestfreetools","type":"module","private":true,"scripts":{"dev":"astro dev","build":"astro build","preview":"astro preview","articles:todo":"node scripts/missing-articles.mjs","indexnow":"node scripts/indexnow.mjs"},"dependencies":{"@astrojs/sitemap":"^3.2.0","@cantoo/pdf-lib":"^2.11.1","@ffmpeg/ffmpeg":"^0.12.15","@ffmpeg/util":"^0.12.2","@huggingface/transformers":"^4.3.2","@vercel/functions":"^3.11.3","astro":"^5.0.0","docx":"^9.16.0","mammoth":"^1.13.0","pdf-lib":"^1.17.1","pdfjs-dist":"^6.5.438","pptx-preview":"^1.0.7","qrcode":"^1.5.4","tesseract.js":"^7.0.0","wawoff2":"^2.0.1","xlsx":"^0.18.5"}}
+{
+  "name": "worldsbestfreetools",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "articles:todo": "node scripts/missing-articles.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.0",
+    "@cantoo/pdf-lib": "^2.11.1",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
+    "@huggingface/transformers": "^4.3.2",
+    "@vercel/functions": "^3.11.3",
+    "astro": "^5.0.0",
+    "docx": "^9.16.0",
+    "jsbarcode": "^3.12.3",
+    "mammoth": "^1.13.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.5.438",
+    "pptx-preview": "^1.0.7",
+    "qrcode": "^1.5.4",
+    "tesseract.js": "^7.0.0",
+    "wawoff2": "^2.0.1",
+    "xlsx": "^0.18.5"
+  }
+}

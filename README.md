@@ -68,3 +68,9 @@ Old URLs such as /category/business/ are permanently redirected (301) in vercel.
 
 ## Games and speed tools
 Reaction Time Test, Wordle (daily + random word) and GPS Car Speedometer live in src/scripts/games.js. The speedometer needs the Permissions-Policy header geolocation=(self) which is set in vercel.json.
+
+## GTA 6 Tools
+Category /category/gta6-tools/ with an unofficial fan GTA 6 Quiz (src/scripts/games.js, question pool Q) and GTA 6 Character Name Generator (src/data/micro-gta.mjs). Both are labelled unofficial and not affiliated with Rockstar Games or Take-Two. Add quiz questions by adding rows to Q (question, 4 answers with the correct one first, index 0, explanation).
+
+## Blog
+The blog is English only. Visitors can read it in any language with the language menu (Google Translate). Translated pages exist for the tools, categories and home pages, not for the blog.

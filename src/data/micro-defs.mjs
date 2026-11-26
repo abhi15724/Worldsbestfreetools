@@ -4,6 +4,7 @@ import a from './micro-everyday.mjs';
 import b from './micro-creator.mjs';
 import c from './micro-dev.mjs';
 import d from './micro-image.mjs';
-export const MICRO=[...a,...b,...c,...d];
+import e from './micro-gta.mjs';
+export const MICRO=[...a,...b,...c,...d,...e];
 export const byslug=Object.fromEntries(MICRO.map(m=>[m.s,m]));
 export {parseField};

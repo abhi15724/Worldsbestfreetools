@@ -7,7 +7,7 @@ finance:'Free finance calculators: EMI, home loan, car loan, SIP, step-up SIP, l
 units:'Free unit converters and measuring tools: online ruler in centimetres and inches, length, weight and temperature converters, protractor, pixel to cm converter and aspect ratio calculator.',
 text:'Free text tools for writers and students: word counter, character counter, case converter, paraphraser, text diff checker, duplicate line remover and text to speech.',
 fonts:'Free fancy text and font tools: stylish text for Instagram and WhatsApp, symbols to copy and paste, text to handwriting, font converter and font pair finder.',
-qr:'Free QR code generators for links, text, WiFi, WhatsApp and UPI. Download high-quality PNG codes with no signup, no expiry and no watermark.',
+qr:'Free QR code and barcode generators for links, text, WiFi, WhatsApp and UPI, plus Code 128, EAN-13, UPC-A and more. Download high-quality PNG or SVG with no signup, no expiry and no watermark.',
 india:'Free tools for Indian languages and numbers: Kruti Dev to Unicode converter, English to Hindi typing and number to words in Indian format.',
 threed:'Free image to 3D tools: turn a photo into a 3D relief, a lithophane for 3D printing or an AI depth map, all inside your browser.',
 dev:'Free developer tools online: JSON formatter, JWT decoder, cron explainer, timestamp and timezone converters, SQL and XML tools, Markdown and HTML converters, regex tester and more. Fast, private and no signup.',
@@ -23,4 +23,5 @@ fun:'Free generators for fun and testing: random name generator for characters, 
 CATINFO.business='Free business and ecommerce calculators: marketplace profit and commission, return rate, COD vs prepaid, reorder point, bundle and bulk pricing, break-even ROAS, overtime, MRR and ARR.';
 CATINFO.everyday='Free everyday and home calculators: fuel cost, mileage, electricity units, solar output, paint, tiles, concrete, wallpaper, recipe scaling, pace splits, barcode and ISBN validators, aquarium and garden planners.';
 CATINFO.student='Free student and education tools: study break and Pomodoro planners, exam countdown, weighted grade and required score calculators, flashcard CSV formatter, dilution and molarity calculators.';
+CATINFO.gta6='Free unofficial GTA 6 fan tools: a GTA 6 quiz with 10 random questions about Vice City, Leonida, Lucia and Jason, and a GTA 6 character name generator for roleplay, stories and games. Not affiliated with Rockstar Games.';
 export const POPULAR=['emi-calculator','sip-calculator','compress-image','merge-pdf','qr-code-generator','image-to-pdf','pdf-to-word','remove-background','age-calculator','password-generator','video-link-downloader','word-counter'];
