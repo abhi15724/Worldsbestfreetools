@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import {cats,live} from '../data/tools.mjs';
+import {POPULAR} from '../data/categories.mjs';
+import {iconFor} from '../lib/icons.mjs';
+const pop=POPULAR.map(s=>live.find(t=>t.slug===s)).filter(Boolean);
+---
+<Base title="Page not found | Worlds Best Free Tools" desc="This page does not exist. Search all free online tools or browse the categories." path="/404/" noindex={true}>
+<h1>Page not found</h1>
+<p class="lead">The page you were looking for may have moved or never existed. Search for a tool or pick a category below.</p>
+<div style="position:relative;max-width:560px;margin:22px auto"><input class="search" data-search type="search" placeholder="Search all tools…" aria-label="Search all tools" autocomplete="off" style="margin:0"></div>
+<div class="chips">{cats.map(c=><a href={`/category/${c.path}/`}>{c.name}</a>)}</div>
+<h2>Popular free tools</h2>
+<div class="grid">{pop.map(t=><a href={`/${t.slug}/`}><Fragment set:html={iconFor(t)}/><span>{t.name}</span></a>)}</div>
+<p style="margin-top:28px"><a href="/">Go to the home page</a> · <a href="/all-tools/">All tools</a></p>
+</Base>

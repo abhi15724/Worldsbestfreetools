@@ -74,6 +74,15 @@
      "value": "public, max-age=604800, stale-while-revalidate=86400"
     }
    ]
+  },
+  {
+   "source": "/search-index/(.*)",
+   "headers": [
+    {
+     "key": "X-Robots-Tag",
+     "value": "noindex"
+    }
+   ]
   }
  ],
  "redirects": [
@@ -295,6 +304,336 @@
   {
    "source": "/category/fun",
    "destination": "/category/game-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/en",
+   "destination": "/",
+   "permanent": true
+  },
+  {
+   "source": "/en/",
+   "destination": "/",
+   "permanent": true
+  },
+  {
+   "source": "/en/:path*",
+   "destination": "/:path*",
+   "permanent": true
+  },
+  {
+   "source": "/index.html",
+   "destination": "/",
+   "permanent": true
+  },
+  {
+   "source": "/tools",
+   "destination": "/all-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/tools/",
+   "destination": "/all-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/3d-image-tools",
+   "destination": "/category/3d-image-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/3d-image-tools/",
+   "destination": "/category/3d-image-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/audio-tools",
+   "destination": "/category/video-audio-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/audio-tools/",
+   "destination": "/category/video-audio-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/business-tools",
+   "destination": "/category/business-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/business-tools/",
+   "destination": "/category/business-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/calculator-tools",
+   "destination": "/category/finance-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/calculator-tools/",
+   "destination": "/category/finance-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/converter-tools",
+   "destination": "/category/pdf-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/converter-tools/",
+   "destination": "/category/pdf-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/date-time-tools",
+   "destination": "/category/date-time-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/date-time-tools/",
+   "destination": "/category/date-time-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/design-tools",
+   "destination": "/category/design-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/design-tools/",
+   "destination": "/category/design-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/developer-tools",
+   "destination": "/category/developer-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/developer-tools/",
+   "destination": "/category/developer-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/everyday-tools",
+   "destination": "/category/everyday-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/everyday-tools/",
+   "destination": "/category/everyday-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/file-converter-tools",
+   "destination": "/category/pdf-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/file-converter-tools/",
+   "destination": "/category/pdf-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/finance-tools",
+   "destination": "/category/finance-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/finance-tools/",
+   "destination": "/category/finance-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/font-tools",
+   "destination": "/category/font-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/font-tools/",
+   "destination": "/category/font-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/game-tools",
+   "destination": "/category/game-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/game-tools/",
+   "destination": "/category/game-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/gaming-tools",
+   "destination": "/category/game-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/gaming-tools/",
+   "destination": "/category/game-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/gta6-tools",
+   "destination": "/category/gta6-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/gta6-tools/",
+   "destination": "/category/gta6-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/health-tools",
+   "destination": "/category/health-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/health-tools/",
+   "destination": "/category/health-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/image-tools",
+   "destination": "/category/image-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/image-tools/",
+   "destination": "/category/image-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/indian-language-tools",
+   "destination": "/category/indian-language-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/indian-language-tools/",
+   "destination": "/category/indian-language-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/measurement-tools",
+   "destination": "/category/measurement-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/measurement-tools/",
+   "destination": "/category/measurement-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/pdf-tools",
+   "destination": "/category/pdf-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/pdf-tools/",
+   "destination": "/category/pdf-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/productivity-tools",
+   "destination": "/category/everyday-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/productivity-tools/",
+   "destination": "/category/everyday-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/qr-code-tools",
+   "destination": "/category/qr-code-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/qr-code-tools/",
+   "destination": "/category/qr-code-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/security-tools",
+   "destination": "/category/security-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/security-tools/",
+   "destination": "/category/security-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/seo-tools",
+   "destination": "/category/seo-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/seo-tools/",
+   "destination": "/category/seo-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/social-media-tools",
+   "destination": "/category/social-media-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/social-media-tools/",
+   "destination": "/category/social-media-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/student-tools",
+   "destination": "/category/student-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/student-tools/",
+   "destination": "/category/student-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/text-tools",
+   "destination": "/category/text-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/text-tools/",
+   "destination": "/category/text-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/video-audio-tools",
+   "destination": "/category/video-audio-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/video-audio-tools/",
+   "destination": "/category/video-audio-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/video-download-tools",
+   "destination": "/category/video-download-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/video-download-tools/",
+   "destination": "/category/video-download-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/video-tools",
+   "destination": "/category/video-audio-tools/",
+   "permanent": true
+  },
+  {
+   "source": "/video-tools/",
+   "destination": "/category/video-audio-tools/",
    "permanent": true
   }
  ]

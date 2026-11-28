@@ -3,35 +3,38 @@ import Base from '../layouts/Base.astro';
 import {cats,live,SITE} from '../data/tools.mjs';
 import {iconFor} from '../lib/icons.mjs';
 import {HOMEKW} from '../data/keywords.mjs';
-import {CATINFO,POPULAR} from '../data/categories.mjs';
+import {CATINFO,POPULAR,HOME_SEARCHES} from '../data/categories.mjs';
 import {LANGS,homeAlts} from '../i18n/index.mjs';
-const N=live.length;
+const N=live.length;const NR=Math.floor(N/10)*10;
 const popular=POPULAR.map(s=>live.find(t=>t.slug===s)).filter(Boolean);
 const groups=cats.map(c=>({c,items:live.filter(t=>t.cat===c.slug)})).filter(g=>g.items.length);
 const faq=[
 ['What is Worlds Best Free Tools?',`Worlds Best Free Tools (also written worlds-best-free-tools or WorldsBestFreeTools) is a collection of ${N} best free online tools: loan, SIP, GST and tax calculators, image and PDF tools, QR code generators, unit converters, fancy text fonts, video link and file download tools and more.`],
 ['Which are the best free online tools here?','Popular free tools include the EMI calculator, SIP calculator, image compressor, merge PDF, image to PDF, PDF to Word, background remover, QR code generator, age calculator and password generator. All are free with no signup.'],
 ['Are the tools really free?','Yes. Every tool is free to use, with no signup, no watermark and no hidden limits.'],
-['Do my files get uploaded?','Most tools run entirely in your browser, so your files and numbers stay on your device. The few exceptions, such as the paraphrasing tool and the contact form, are described in the Privacy Policy.'],
+['Do my files get uploaded?','Most tools run entirely in your browser, so your files and numbers stay on your device. The few exceptions, such as the contact form, are described in the Privacy Policy.'],
 ['Can I download a video from a link?','Yes, if you have a direct link to a video or file you are allowed to save. The Video Link Downloader and File Downloader from URL save it straight from your browser. They do not download from YouTube, Instagram or similar platforms.'],
+['Do I need to sign up or install anything?','No. You can use the tools in your browser on phone, tablet or desktop without creating an account. Most tools process your files and text on your device, and tools that need the internet, such as live currency rates, say so on their page.'],
+['What kinds of free online tools are available?',`There are ${N} tools in categories such as PDF tools, image tools, finance and loan calculators, text and font tools, QR code and barcode generators, developer tools, SEO tools, social media tools, video and file download helpers, games and GTA 6 fan tools.`],
 ['Can I use the site in my own language?','Yes. Hindi, Spanish, Portuguese (Brazil), Indonesian, Arabic, German, Japanese, Chinese (Simplified and Taiwan) and Russian have translated pages, and the language menu translates the rest. Finance calculators let you pick your own currency.'],
 ['Can AI assistants and developers use these tools?','Yes. Many calculators are available through a free read-only API and an MCP server, and every tool page also exists as Markdown for AI agents. See llms.txt and openapi.json.']];
 const ld=[
-{'@type':'WebSite',name:'Worlds Best Free Tools',alternateName:['worlds-best-free-tools','WorldsBestFreeTools','worlds best free tools','World\'s Best Free Tools','best free tools','free online tools'],url:SITE+'/',inLanguage:'en',potentialAction:{'@type':'SearchAction',target:{'@type':'EntryPoint',urlTemplate:SITE+'/?q={search_term_string}'},'query-input':'required name=search_term_string'}},
-{'@type':'Organization',name:'Worlds Best Free Tools',alternateName:['worlds-best-free-tools','WorldsBestFreeTools'],url:SITE+'/',logo:{'@type':'ImageObject',url:SITE+'/icon-512.png',width:512,height:512}},
+{'@type':'WebSite',name:'Worlds Best Free Tools',alternateName:['worlds-best-free-tools','WorldsBestFreeTools','WorldsBestFreeTools.online','worlds best free tools','World\'s Best Free Tools','Worlds Best Tools','Worlds Best Online Tools','best free tools','free online tools'],url:SITE+'/',inLanguage:'en',potentialAction:{'@type':'SearchAction',target:{'@type':'EntryPoint',urlTemplate:SITE+'/?q={search_term_string}'},'query-input':'required name=search_term_string'}},
+{'@type':'Organization',name:'Worlds Best Free Tools',alternateName:['worlds-best-free-tools','WorldsBestFreeTools','Worlds Best Tools'],slogan:'Free Tools. Unlimited Possibilities.',url:SITE+'/',logo:{'@type':'ImageObject',url:SITE+'/icon-512.png',width:512,height:512}},
 {'@type':'CollectionPage',name:'Best free online tools',url:SITE+'/',description:`${N} free online tools: calculators, PDF, image, QR, video link and file download tools.`,hasPart:groups.map(g=>({'@type':'CollectionPage',name:g.c.name,url:`${SITE}/category/${g.c.path}/`}))},
 {'@type':'ItemList',name:'Free online tools',numberOfItems:N,itemListElement:live.map((t,i)=>({'@type':'ListItem',position:i+1,name:t.name,url:`${SITE}/${t.slug}/`}))},
 {'@type':'FAQPage',mainEntity:faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))}];
 ---
-<Base md="/md/index.md" title="Free Online Tools: Best Free Tools, No Signup | Worlds Best Free Tools" desc={`Worlds Best Free Tools: ${N} best free online tools. Free calculators, PDF, image, QR and video link tools. No signup, no uploads, runs in your browser.`} ld={ld} keywords={HOMEKW} alts={homeAlts()}>
-<div class="hh"><h1>Best free online tools that just work</h1>
-<p class="lead">Worlds Best Free Tools is a collection of {N} free tools: calculators, converters, PDF, image, QR, video link and file download tools. No signup, no watermark. Everything runs in your browser.</p>
-<ul class="trust"><li>100% free</li><li>No signup</li><li>Private: runs in your browser</li><li>Works on phone and desktop</li></ul></div>
+<Base md="/md/index.md" title={`Worlds Best Free Tools – ${NR}+ Free Online Tools & Utilities`} desc={`Discover ${NR}+ free online tools for PDF, images, calculators, text, SEO and more. Fast online utilities. No signup required where supported.`} ld={ld} keywords={HOMEKW} alts={homeAlts()}>
+<div class="hh"><p class="tagline" style="margin:0 0 6px;font-weight:700;color:var(--acc);letter-spacing:.02em">Free Tools. Unlimited Possibilities.</p><h1>Free Online Tools for Everyone – {NR}+ Powerful Utilities</h1>
+<p class="lead">Worlds Best Free Tools is a collection of {N} free tools: calculators, converters, PDF, image, QR, video link and file download tools. No signup or watermark. Most tools run privately in your browser, so your files and text stay on your device.</p>
+<ul class="trust"><li>Free to use</li><li>No signup needed</li><li>Most tools run in your browser</li><li>Works on phone and desktop</li></ul></div>
 <input class="search" id="q" type="search" placeholder="Search free tools, e.g. EMI calculator, merge PDF" aria-label="Search tools" autocomplete="off">
 <div class="chips" id="chips">{groups.slice(0,10).map(g=><a href={`/category/${g.c.path}/`}>{g.c.name}</a>)}</div>
 <section id="lang-tools" style="margin-top:26px"><h2 style="margin:0 0 12px">Use the tools in your language</h2><div class="chips" style="margin-top:0">{homeAlts().filter(a=>a.code!=='en').map(a=><a href={a.url} hreflang={a.lang} lang={a.lang}>{a.name}</a>)}</div></section>
 <section id="pop"><h2>Popular free tools</h2>
 <div class="grid">{popular.map(t=><a href={`/${t.slug}/`}><Fragment set:html={iconFor(t)}/><span>{t.name}</span></a>)}</div></section>
+<section id="searches"><h2>Popular searches</h2><div class="chips" style="margin-top:0">{HOME_SEARCHES.filter(([,sl])=>live.some(t=>t.slug===sl)).map(([label,sl])=><a href={`/${sl}/`}>{label}</a>)}</div></section>
 <div id="list">{groups.map(g=><section class="cat"><h2><a href={`/category/${g.c.path}/`}>{g.c.name}</a><a class="more" href={`/category/${g.c.path}/`}>{g.items.length} tools &rsaquo;</a></h2>
 <div class="grid">{g.items.map(t=><a href={`/${t.slug}/`}><Fragment set:html={iconFor(t)}/><span>{t.name}</span></a>)}</div></section>)}</div>
 <p id="none" hidden>No tool found. Try another word, for example "pdf", "loan" or "qr".</p>
@@ -40,7 +43,7 @@ const ld=[
 <section style="margin-top:32px"><h2>Frequently asked questions</h2>{faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</section>
 </Base>
 <script>
-const q=document.getElementById('q'),items=[...document.querySelectorAll('#list .grid a')],secs=[...document.querySelectorAll('#list .cat')],pop=document.getElementById('pop'),chips=document.getElementById('chips'),lt=document.getElementById('lang-tools'),none=document.getElementById('none');
-const run=()=>{const v=q.value.trim().toLowerCase();items.forEach(x=>x.style.display=!v||x.textContent.toLowerCase().includes(v)?'':'none');secs.forEach(s=>s.style.display=[...s.querySelectorAll('.grid a')].some(a=>a.style.display!=='none')?'':'none');pop.style.display=v?'none':'';chips.style.display=v?'none':'';lt.style.display=v?'none':'';none.hidden=!v||items.some(a=>a.style.display!=='none')};
+const q=document.getElementById('q'),items=[...document.querySelectorAll('#list .grid a')],secs=[...document.querySelectorAll('#list .cat')],pop=document.getElementById('pop'),chips=document.getElementById('chips'),lt=document.getElementById('lang-tools'),ps=document.getElementById('searches'),none=document.getElementById('none');
+const run=()=>{const v=q.value.trim().toLowerCase();items.forEach(x=>x.style.display=!v||x.textContent.toLowerCase().includes(v)?'':'none');secs.forEach(s=>s.style.display=[...s.querySelectorAll('.grid a')].some(a=>a.style.display!=='none')?'':'none');pop.style.display=v?'none':'';chips.style.display=v?'none':'';lt.style.display=v?'none':'';ps.style.display=v?'none':'';none.hidden=!v||items.some(a=>a.style.display!=='none')};
 q.addEventListener('input',run);const init=new URLSearchParams(location.search).get('q');if(init){q.value=init;run()}
 </script>

@@ -5,9 +5,7 @@ Build:   npm run build  (static site in dist/)
 ## Deploy to Vercel
 1. Push this folder to a GitHub repo, then "Add New Project" in Vercel and import it (Astro is auto-detected).
 2. Settings > Domains: add worldsbestfreetools.online and set the DNS records Vercel shows.
-3. Paraphraser only: Settings > Environment Variables, add ANTHROPIC_API_KEY (optional ANTHROPIC_MODEL).
-   Set a monthly spend limit on your key and add a Vercel Firewall rate-limit rule for /api/paraphrase.
-4. Submit https://worldsbestfreetools.online/sitemap-index.xml in Google Search Console.
+3. Submit https://worldsbestfreetools.online/sitemap-index.xml in Google Search Console.
 
 ## Add a tool
 Add one line to src/data/tools.mjs: category|slug|Name|engine|param. Tools with an engine get a page,
@@ -74,3 +72,13 @@ Category /category/gta6-tools/ with an unofficial fan GTA 6 Quiz (src/scripts/ga
 
 ## Blog
 The blog is English only. Visitors can read it in any language with the language menu (Google Translate). Translated pages exist for the tools, categories and home pages, not for the blog.
+
+## SEO and AI-search setup (what is in place)
+- Redirects (vercel.json): /en and /en/... go to the real page (the site has no /en/ prefix); category guesses such as /pdf-tools/, /calculator-tools/, /gaming-tools/ go to /category/<name>/; old category URLs are 301s.
+- Custom 404 page (src/pages/404.astro): noindex, search box, categories and popular tools.
+- Home page: title/description/H1 follow the keyword plan, "Popular searches" section links keyword phrases to the single most relevant tool (src/data/categories.mjs HOME_SEARCHES, SEARCHES).
+- Category pages: intro, tool list, popular searches, and an answer-first FAQ with FAQPage schema (good for AI answers).
+- Tool pages: "people also search" phrases come from src/data/keywords.mjs (add() lines at the bottom). The meta keywords tag is ignored by Google; the phrases are used in visible text and links.
+- AI discovery: /llms.txt (key facts, categories, tools), /llms-full.txt, Markdown copy of every page (/md/...), MCP server, OpenAPI, /.well-known/ard.json, robots.txt with explicit AI crawler rules.
+- /search-index/*.json is disallowed in robots.txt and sent with X-Robots-Tag: noindex.
+After each deploy: Search Console > Sitemaps > submit sitemap-index.xml, then URL Inspection > Request indexing for the home page and your top category pages. Monitor Performance (Search results and Generative AI).
